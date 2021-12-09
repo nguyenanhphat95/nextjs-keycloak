@@ -155,7 +155,7 @@ const Home = () => {
       {isMobile && (
         <>
           <Grid item xs={12}>
-            <SectionMobile1 />
+            <SectionMobile1 onSubmit={_handleSubmitForm} />
           </Grid>
           <Grid item xs={12}>
             <div className={classes.rootMobileUtility}>

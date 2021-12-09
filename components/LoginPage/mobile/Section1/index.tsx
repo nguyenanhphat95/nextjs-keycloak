@@ -43,17 +43,30 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SectionMobile1 = () => {
+interface Props {
+  onSubmit: (
+    JSEnscript: any,
+    data: { username: string; password: string }
+  ) => void;
+}
+
+const SectionMobile1 = (props: Props) => {
+  const { onSubmit } = props;
   const classes = useStyles();
 
   const { locale } = useRouter();
   const t = _get(resources, [locale || LANGUAGE.VI, "notification"]);
 
+  const _handleSubmit = (data: { username: string; password: string }) => {
+    const JSEnscript = _get(window, "JSEncrypt");
+    onSubmit(JSEnscript, data);
+  };
+
   return (
     <div className={classes.root}>
       <Grid container direction="column" spacing={2}>
         <Grid item>
-          <LoginForm onSubmit={() => null} />
+          <LoginForm onSubmit={_handleSubmit} />
         </Grid>
 
         <Grid item>
