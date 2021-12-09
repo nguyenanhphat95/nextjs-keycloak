@@ -1,0 +1,28 @@
+import { ResponseData } from "models";
+import { NextRouter } from "next/router";
+
+export const ERROR_CODE = {
+  Success: "00",
+  Unauthorized: "01",
+  SessionExpired: "02",
+  UserNotExist: "03",
+  SessionIdNotFound: "04",
+  FormatMessageInvalid: "05",
+  SystemError: "99",
+};
+
+export function handleErrorWithResponse(
+  router: NextRouter,
+  resp: ResponseData
+) {
+  if (resp.response.responseCode === ERROR_CODE.Success) {
+    return;
+  }
+
+  router.push({
+    pathname: "/error",
+    query: {
+      code: resp.response.responseCode,
+    },
+  });
+}
