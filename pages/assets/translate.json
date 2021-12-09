@@ -4,7 +4,11 @@
       "title": "Đăng nhập eBanking",
       "username": "Tên đăng nhập",
       "password": "Mật khẩu",
-      "btnSubmit": "Đăng nhập"
+      "btnSubmit": "Đăng nhập",
+      "cantLogin": "Bạn không thể đăng nhập?",
+      "registerAccount": "Tạo tài khoản ngay",
+      "personal": "Cá nhân",
+      "enterprise": "Doanh nghiệp"
     },
     "utilityBank": {
       "title": "Khám phá tiện ích eBanking",
@@ -74,7 +78,11 @@
       "title": "Login to eBanking",
       "username": "Username",
       "password": "Password",
-      "btnSubmit": "Sign in"
+      "btnSubmit": "Sign in",
+      "cantLogin": "You can't login?",
+      "registerAccount": "Create an account now",
+      "personal": "Personal",
+      "enterprise": "Enterprise"
     },
     "utilityBank": {
       "title": "Discover the utility of eBanking",

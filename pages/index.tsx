@@ -77,9 +77,6 @@ const Home = () => {
         clientId: query.client_id as string,
         clientSecret: CLIENT_SECRET,
         redirectUri: query.redirect_uri as string,
-        // clientId: "minhnq9",
-        // clientSecret: CLIENT_SECRET,
-        // redirectUri: "http://127.0.0.1",
       },
     };
     verifyClientApi(body)

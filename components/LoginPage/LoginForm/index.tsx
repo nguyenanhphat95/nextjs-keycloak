@@ -15,6 +15,7 @@ import rightIcon from "public/images/rightloging.png";
 import resources from "pages/assets/translate.json";
 import { LANGUAGE } from "consts";
 
+import { toast } from "react-toastify";
 import _get from "lodash/get";
 createTheme();
 const useStyles = makeStyles(() => ({
@@ -25,6 +26,36 @@ const useStyles = makeStyles(() => ({
   loginTitle: {
     fontSize: 32,
     fontWeight: 500,
+  },
+  textCenter: {
+    textAlign: "center",
+  },
+  textForgot: {
+    textDecorationLine: "underline",
+    fontSize: 16,
+  },
+  btnCustomRegister: {
+    borderColor: "#333333 !important",
+    color: "#333333 !important",
+  },
+  personalLeft: {
+    background: "#F00020",
+    fontWeight: 600,
+    borderRadius: "12px 0px 0px 12px",
+    fontSize: 18,
+    textAlign: "center",
+    color: "white",
+    paddingTop: 14,
+    paddingBottom: 14,
+  },
+  enterpriseRight: {
+    border: "1px solid #B1B5C9",
+    fontWeight: 600,
+    borderRadius: "0px 12px 12px 0px",
+    fontSize: 18,
+    textAlign: "center",
+    paddingTop: 14,
+    paddingBottom: 14,
   },
 }));
 
@@ -50,6 +81,14 @@ const LoginForm = (props: Props) => {
       [id]: value,
     });
   };
+
+  const _handleSubmit = () => {
+    if (!formData.username || !formData.password) {
+      toast.error("Please enter username and password");
+      return;
+    }
+    onSubmit(formData);
+  };
   return (
     <Box py={3} px={2} className={classes.root}>
       <Script
@@ -69,6 +108,16 @@ const LoginForm = (props: Props) => {
 
         <Grid item xs={12}>
           <Grid container direction="column" spacing={2}>
+            <Grid item>
+              <Grid container justifyContent="center">
+                <Grid item xs={6} md={5} className={classes.personalLeft}>
+                  {t?.personal}
+                </Grid>
+                <Grid item xs={6} md={5} className={classes.enterpriseRight}>
+                  {t?.enterprise}
+                </Grid>
+              </Grid>
+            </Grid>
             <Grid item>
               <InputCustom
                 InputProps={{
@@ -101,10 +150,24 @@ const LoginForm = (props: Props) => {
                 variant="contained"
                 color="secondary"
                 fullWidth
-                onClick={() => onSubmit(formData)}
-                disabled={!formData.password || !formData.username}
+                onClick={_handleSubmit}
               >
                 {t?.btnSubmit}
+              </ButtonCustom>
+            </Grid>
+
+            <Grid item className={classes.textCenter}>
+              <span className={classes.textForgot}>{t?.cantLogin}</span>
+            </Grid>
+
+            <Grid item>
+              <ButtonCustom
+                startIcon={<Image src={rightIcon} alt="icon-right" />}
+                variant="outlined"
+                fullWidth
+                className={classes.btnCustomRegister}
+              >
+                {t?.registerAccount}
               </ButtonCustom>
             </Grid>
           </Grid>
