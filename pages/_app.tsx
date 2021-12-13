@@ -1,10 +1,13 @@
 import { ReactElement, ReactNode, useEffect } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
-import ThemeProvider from "../providers/ThemeProvider";
-import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import { createEmotionCache } from "styles/utils";
+import CssBaseline from "@mui/material/CssBaseline";
+
+import ThemeProvider from "../providers/ThemeProvider";
+import QueryClientProvider from "../providers/QueryClientProvider";
+
 import "../styles.css";
 const clientSideEmotionCache = createEmotionCache();
 
@@ -29,10 +32,12 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return getLayout(
     <CacheProvider value={clientSideEmotionCache}>
-      <ThemeProvider>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <QueryClientProvider>
+        <ThemeProvider>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </QueryClientProvider>
     </CacheProvider>
   );
 }

@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 import { ButtonCustom } from "components/commons";
 
 import _get from "lodash/get";
+import useGetPublicKey from "hooks/useGetPublicKey";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Home = () => {
   const classes = useStyles();
-
+  const { status, data, error, isFetching } = useGetPublicKey();
   return (
     <div className={classes.root}>
       <ButtonCustom variant="contained" color="secondary">
