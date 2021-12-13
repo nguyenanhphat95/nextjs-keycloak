@@ -25,8 +25,13 @@ import {
   verifyApi,
   getPublicKey,
 } from "services";
-import { generateRequestBody, handleErrorWithResponse } from "helpers";
+import {
+  ERROR_CODE,
+  generateRequestBody,
+  handleErrorWithResponse,
+} from "helpers";
 import { CLIENT_SECRET, REDIRECT_URI } from "consts";
+
 import desktopPic from "public/images/desktop.png";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -45,6 +50,17 @@ const useStyles = makeStyles(() => ({
     margin: "50px 40px",
   },
 }));
+
+const ERROR_MESSAGE_VERIFY_USER = {
+  [ERROR_CODE.Unauthorized]: "Username or password incorrect",
+  [ERROR_CODE.SessionExpired]: "Session Expired",
+  [ERROR_CODE.UserNotExist]: "User Not Exist",
+  [ERROR_CODE.SessionIdNotFound]: "Session Id Not Found",
+  [ERROR_CODE.FormatMessageInvalid]: "Format Message Invalid",
+  [ERROR_CODE.SystemError]: "System Error",
+  [ERROR_CODE.PasswordExpired]:
+    "Expired password requires accessing ebank.hdbank.com.vn to change password",
+};
 
 const Home = () => {
   const classes = useStyles();
@@ -98,8 +114,9 @@ const Home = () => {
   ) => {
     const resp = await getPublicKey();
     const publicKey = _get(resp, "data.data.key");
+
     if (!publicKey) {
-      toast.error("Get public key failed");
+      toast.error("Get public key eror");
       return;
     }
 
@@ -119,7 +136,8 @@ const Home = () => {
       .then((res) => {
         const code = _get(res, "data.data.code");
         if (!code) {
-          toast.error("Get code failed");
+          const errorCode = _get(res, "data.response.responseCode");
+          toast.error(ERROR_MESSAGE_VERIFY_USER[errorCode] || "Login failed");
           return;
         }
         // Redirect to redirect uri

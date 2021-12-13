@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
-import { Grid, Popover } from "@mui/material";
+import { Grid, Popover, Box } from "@mui/material";
 
 import hdBankLogoPic from "public/images/HDBanklogo.png";
 import languageViPic from "public/images/language-vi.png";
@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme: any) => ({
   },
   pointer: {
     cursor: "pointer",
+  },
+  wrapperIcon: {
+    display: "flex",
   },
 }));
 
@@ -95,54 +98,50 @@ const SectionHeader = () => {
             }}
           >
             <div className={classes.languageContainer}>
-              <Grid container direction="column" spacing={1}>
-                <Grid item xs={12}>
-                  <Link href={asPath} locale={LANGUAGE.VI}>
-                    <Grid
-                      onClick={_closeLanguage}
-                      alignItems="center"
-                      container
-                      spacing={1}
-                      className={classes.pointer}
-                    >
-                      <Grid item xs={4}>
-                        <Image
-                          width={30}
-                          height={30}
-                          src={languageViPic}
-                          alt="star-icon"
-                        />
-                      </Grid>
-                      <Grid item xs={8}>
-                        <b>Tiếng Việt</b>
-                      </Grid>
+              <Box mb={2}>
+                <Link href={asPath} locale={LANGUAGE.VI}>
+                  <Grid
+                    onClick={_closeLanguage}
+                    alignItems="center"
+                    container
+                    className={classes.pointer}
+                  >
+                    <Grid item xs={4} className={classes.wrapperIcon}>
+                      <Image
+                        width={30}
+                        height={30}
+                        src={languageViPic}
+                        alt="star-icon"
+                      />
                     </Grid>
-                  </Link>
-                </Grid>
-                <Grid item xs={12}>
-                  <Link href={asPath} locale={LANGUAGE.EN}>
-                    <Grid
-                      onClick={_closeLanguage}
-                      alignItems="center"
-                      container
-                      spacing={1}
-                      className={classes.pointer}
-                    >
-                      <Grid item xs={4}>
-                        <Image
-                          width={30}
-                          height={30}
-                          src={languageEnPic}
-                          alt="star-icon"
-                        />
-                      </Grid>
-                      <Grid item xs={8}>
-                        <b>English</b>
-                      </Grid>
+                    <Grid item xs={8}>
+                      <b>Tiếng Việt</b>
                     </Grid>
-                  </Link>
-                </Grid>
-              </Grid>
+                  </Grid>
+                </Link>
+              </Box>
+              <Box>
+                <Link href={asPath} locale={LANGUAGE.EN}>
+                  <Grid
+                    onClick={_closeLanguage}
+                    alignItems="center"
+                    container
+                    className={classes.pointer}
+                  >
+                    <Grid item xs={4} className={classes.wrapperIcon}>
+                      <Image
+                        width={30}
+                        height={30}
+                        src={languageEnPic}
+                        alt="star-icon"
+                      />
+                    </Grid>
+                    <Grid item xs={8}>
+                      <b>English</b>
+                    </Grid>
+                  </Grid>
+                </Link>
+              </Box>
             </div>
           </Popover>
         </Grid>
