@@ -5,7 +5,7 @@ import ThemeProvider from "../providers/ThemeProvider";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import { createEmotionCache } from "styles/utils";
-
+import "../styles.css";
 const clientSideEmotionCache = createEmotionCache();
 
 type NextPageWithLayout = NextPage & {

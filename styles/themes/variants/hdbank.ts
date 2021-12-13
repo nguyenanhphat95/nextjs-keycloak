@@ -120,40 +120,39 @@ const red: ColorSchemeKEC = {
   A400: "#FF1744",
   A700: "#D50000",
 };
+// const purple: ColorSchemeKEC = {
+//   50: "#F3E5F5",
+//   100: "#E1BEE7",
+//   200: "#CE93D8",
+//   300: "#BA68C8",
+//   400: "#AB47BC",
+//   500: "#9C27B0",
+//   600: "#8E24AA",
+//   700: "#7B1FA2",
+//   800: "#6A1B9A",
+//   900: "#4A148C",
+//   A100: "#EA80FC",
+//   A200: "#E040FB",
+//   A400: "#D500F9",
+//   A700: "#AA00FF",
+// };
 
-const purple: ColorSchemeKEC = {
-  50: "#F3E5F5",
-  100: "#E1BEE7",
-  200: "#CE93D8",
-  300: "#BA68C8",
-  400: "#AB47BC",
-  500: "#9C27B0",
-  600: "#8E24AA",
-  700: "#7B1FA2",
-  800: "#6A1B9A",
-  900: "#4A148C",
-  A100: "#EA80FC",
-  A200: "#E040FB",
-  A400: "#D500F9",
-  A700: "#AA00FF",
-};
-
-const cyan: ColorSchemeKEC = {
-  50: "#E0F7FA",
-  100: "#B2EBF2",
-  200: "#80DEEA",
-  300: "#4DD0E1",
-  400: "#26C6DA",
-  500: "#00BCD4",
-  600: "#00ACC1",
-  700: "#0097A7",
-  800: "#00838F",
-  900: "#006064",
-  A100: "#84FFFF",
-  A200: "#18FFFF",
-  A400: "#00E5FF",
-  A700: "#00B8D4",
-};
+// const cyan: ColorSchemeKEC = {
+//   50: "#E0F7FA",
+//   100: "#B2EBF2",
+//   200: "#80DEEA",
+//   300: "#4DD0E1",
+//   400: "#26C6DA",
+//   500: "#00BCD4",
+//   600: "#00ACC1",
+//   700: "#0097A7",
+//   800: "#00838F",
+//   900: "#006064",
+//   A100: "#84FFFF",
+//   A200: "#18FFFF",
+//   A400: "#00E5FF",
+//   A700: "#00B8D4",
+// };
 
 const common: CommonColors = {
   white: "#fff",
@@ -162,15 +161,15 @@ const common: CommonColors = {
 
 const palette: PaletteOptions = {
   primary: {
-    main: blue[900],
+    main: blue[500],
     light: "#64B6F7",
     dark: blue[700],
     contrastText: common.white,
   },
   secondary: {
-    main: "#FFD643",
-    light: "#FFD643",
-    dark: "#FFD643",
+    main: orange[500],
+    light: "#F06191",
+    dark: orange[700],
     contrastText: common.black,
   },
   info: {
@@ -182,7 +181,7 @@ const palette: PaletteOptions = {
   error: {
     main: red[500],
     light: "#F88078",
-    dark: "#E31B0C",
+    dark: red[700],
     contrastText: common.white,
   },
   warning: {
@@ -213,20 +212,21 @@ const palette: PaletteOptions = {
     default: common.white,
   },
   contrastThreshold: 3,
+  blue,
 };
 
 const theme: Readonly<ThemeOptions> = {
   palette,
   typography: {
-    fontSize: 14,
+    fontSize: 16,
     h1: {
-      fontSize: "6rem",
+      fontSize: "3.6rem",
       fontWeight: 300,
       letterSpacing: "-1.5px",
       textTransform: "none",
     },
     h2: {
-      fontSize: "3.75rem",
+      fontSize: "3.2rem",
       fontWeight: 300,
       letterSpacing: "-0.5px",
       textTransform: "none",
@@ -238,66 +238,65 @@ const theme: Readonly<ThemeOptions> = {
       textTransform: "none",
     },
     h4: {
-      fontSize: "2.125rem",
+      fontSize: "2.8rem",
       fontWeight: 400,
       letterSpacing: "0.25px",
       textTransform: "none",
     },
     h5: {
-      fontSize: "1.5rem",
+      fontSize: "2.6rem",
       fontWeight: 300,
       letterSpacing: "0px",
       textTransform: "none",
     },
     h6: {
-      fontSize: "1.25rem",
+      fontSize: "2.4rem",
       fontWeight: 500,
       letterSpacing: "0.15px",
       textTransform: "none",
     },
     subtitle1: {
-      fontSize: "1rem",
+      fontSize: "2.2rem",
       fontWeight: 400,
       letterSpacing: "0.15px",
       textTransform: "none",
     },
     subtitle2: {
-      fontSize: "0.875rem",
+      fontSize: "2rem",
       fontWeight: 500,
       letterSpacing: "0.1px",
       textTransform: "none",
     },
     body1: {
-      fontSize: "1rem",
+      fontSize: "1.8rem",
       fontWeight: 400,
       letterSpacing: "0.15px",
       textTransform: "none",
     },
     body2: {
-      fontSize: "0.875rem",
+      fontSize: "1.6rem",
       fontWeight: 400,
       letterSpacing: "0.15px",
       textTransform: "none",
     },
     button: {
-      fontSize: "0.875rem",
+      fontSize: "1.8rem",
       fontWeight: 500,
       letterSpacing: "0.4px",
       textTransform: "capitalize",
     },
     caption: {
-      fontSize: "0.75rem",
+      fontSize: "1.4rem",
       fontWeight: 400,
       letterSpacing: "0.4px",
       textTransform: "none",
     },
     overline: {
-      fontSize: "0.75rem",
+      fontSize: "1.4rem",
       fontWeight: 400,
       letterSpacing: "1px",
       textTransform: "capitalize",
     },
   },
 };
-
 export default theme;
