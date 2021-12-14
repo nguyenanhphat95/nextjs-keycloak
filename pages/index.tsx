@@ -116,7 +116,7 @@ const Home = () => {
     const publicKey = _get(resp, "data.data.key");
 
     if (!publicKey) {
-      toast.error("Get public key eror");
+      toast.error("Get public key error");
       return;
     }
 
