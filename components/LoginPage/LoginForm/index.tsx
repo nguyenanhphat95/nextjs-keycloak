@@ -89,10 +89,7 @@ const LoginForm = (props: Props) => {
   };
   return (
     <Box py={3} px={2} className={classes.root}>
-      <Script
-        id="stripe-js"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"
-      />
+      <Script id="jsencrypt-id" src="/js/jsencrypt.min.js" />
       <Grid container direction="column" spacing={3}>
         <Grid item xs={12}>
           <Box
