@@ -25,6 +25,8 @@ import {
   VerifyBody,
   verifyApi,
   getPublicKey,
+  getListAccountApi,
+  AccountItem,
 } from "services";
 
 import {
@@ -32,7 +34,7 @@ import {
   generateRequestBody,
   handleErrorWithResponse,
 } from "helpers";
-import { CLIENT_SECRET, REDIRECT_URI } from "consts";
+import { CLIENT_SECRET } from "consts";
 
 import desktopPic from "public/images/desktop.png";
 
@@ -79,6 +81,7 @@ const STKPage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [loginStep, setLoginStep] = useState(LOGIN_STEP.step1);
+  const [listAccount, setListAccount] = useState<AccountItem[]>([]);
   const accountRef = useRef<string | number>("");
 
   const _checkHaveParam = useCallback((query: ParsedUrlQuery) => {
@@ -124,6 +127,10 @@ const STKPage = () => {
     data: { username: string; password: string }
   ) => {
     setLoginStep(LOGIN_STEP.step2);
+    getListAccountApi(data.username).then((res) => {
+      setListAccount(res.data);
+    });
+
     // const resp = await getPublicKey();
     // const publicKey = _get(resp, "data.data.key");
 
@@ -185,6 +192,7 @@ const STKPage = () => {
         <>
           <Grid item xs={12}>
             <SectionMobile1
+              listAccount={listAccount}
               step={loginStep}
               onChooseAccount={_handleChooseAccount}
               onSubmit={_handleSubmitForm}
@@ -207,6 +215,7 @@ const STKPage = () => {
 
           <Grid item xs={12}>
             <SectionLogin
+              listAccount={listAccount}
               step={loginStep}
               onSubmit={_handleSubmitForm}
               onChooseAccount={_handleChooseAccount}

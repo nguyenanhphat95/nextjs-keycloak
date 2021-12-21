@@ -31,10 +31,11 @@ interface Props {
   ) => void;
   onChooseAccount: (value: string | number) => void;
   step: string;
+  listAccount?: any[];
 }
 
 const SectionLogin = (props: Props) => {
-  const { onSubmit, step, onChooseAccount } = props;
+  const { onSubmit, step, onChooseAccount, ...rest } = props;
   const classes = useStyles();
 
   const _handleSubmit = (data: { username: string; password: string }) => {
@@ -55,7 +56,7 @@ const SectionLogin = (props: Props) => {
                 <LoginForm onSubmit={_handleSubmit} />
               )}
               {step === LOGIN_STEP.step2 && (
-                <ChooseAccountForm onSubmit={onChooseAccount} />
+                <ChooseAccountForm onSubmit={onChooseAccount} {...rest} />
               )}
               {step === LOGIN_STEP.step3 && <LoginSuccessForm />}
             </Grid>

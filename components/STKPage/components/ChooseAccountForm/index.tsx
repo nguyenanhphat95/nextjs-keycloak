@@ -32,10 +32,11 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
   onSubmit: (value: string | number) => void;
+  listAccount?: any[];
 }
 
 const ChooseAccountForm = (props: Props) => {
-  const { onSubmit } = props;
+  const { onSubmit, listAccount } = props;
   const classes = useStyles();
   const [account, setAccount] = useState("");
   const { locale } = useRouter();
@@ -69,12 +70,7 @@ const ChooseAccountForm = (props: Props) => {
           <SelectCustom
             value={account}
             fullWidth
-            options={[
-              { id: 1, value: "test 1" },
-              { id: 2, value: "text 2" },
-              { id: 3, value: "test 3" },
-              { id: 4, value: "text 4" },
-            ]}
+            options={listAccount}
             placeholder={t.placeholderAccount}
             onChange={(event) => {
               setAccount(_get(event, "target.value"));

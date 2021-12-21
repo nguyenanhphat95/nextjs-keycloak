@@ -54,10 +54,11 @@ interface Props {
   ) => void;
   step: string;
   onChooseAccount: (value: string | number) => void;
+  listAccount: any[];
 }
 
 const SectionMobile1 = (props: Props) => {
-  const { onSubmit, step, onChooseAccount } = props;
+  const { onSubmit, step, onChooseAccount, ...rest } = props;
   const classes = useStyles();
 
   const { locale } = useRouter();
@@ -74,7 +75,7 @@ const SectionMobile1 = (props: Props) => {
         <Grid item>
           {step === LOGIN_STEP.step1 && <LoginForm onSubmit={_handleSubmit} />}
           {step === LOGIN_STEP.step2 && (
-            <ChooseAccountForm onSubmit={onChooseAccount} />
+            <ChooseAccountForm onSubmit={onChooseAccount} {...rest} />
           )}
           {step === LOGIN_STEP.step3 && <LoginSuccessForm />}
         </Grid>

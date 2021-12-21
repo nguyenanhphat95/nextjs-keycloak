@@ -5,7 +5,10 @@ import { makeStyles } from "@mui/styles";
 import { OptionSelectType } from "consts/types";
 import cn from "classnames";
 const useStyles = makeStyles(() => ({
-  root: {},
+  root: {
+    borderRadius: "40px !important",
+    height: 58,
+  },
 }));
 
 interface Props<T> extends SelectProps {
