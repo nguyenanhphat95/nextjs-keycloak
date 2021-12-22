@@ -7,7 +7,7 @@ import { Grid, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 
-import { LANGUAGE } from "consts";
+import { LANGUAGE } from "commons/constants";
 import resources from "pages/assets/translate.json";
 
 import notificationIcon from "public/images/Notification.png";

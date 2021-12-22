@@ -1,6 +1,6 @@
 import createCache from "@emotion/cache";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
-import pjThemes from "./themes";
+import pjThemes from ".";
 
 export function getTheme(): ThemeOptions {
   return pjThemes;

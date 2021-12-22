@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { API_DOMAIN } from "consts";
+import { API_DOMAIN } from "commons/constants";
 
 export interface ListAccountResponse {
   data: AccountItem[];

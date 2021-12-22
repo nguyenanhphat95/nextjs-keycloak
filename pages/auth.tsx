@@ -29,8 +29,8 @@ import {
   ERROR_CODE,
   generateRequestBody,
   handleErrorWithResponse,
-} from "helpers";
-import { CLIENT_SECRET, REDIRECT_URI } from "consts";
+} from "commons/helpers";
+import { CLIENT_SECRET, REDIRECT_URI } from "commons/constants";
 
 import desktopPic from "public/images/desktop.png";
 

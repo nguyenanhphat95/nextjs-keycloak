@@ -2,7 +2,7 @@ import { ReactElement, ReactNode, useEffect } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { CacheProvider } from "@emotion/react";
-import { createEmotionCache } from "styles/utils";
+import { createEmotionCache } from "styles/themes/utils";
 import CssBaseline from "@mui/material/CssBaseline";
 import ThemeProvider from "../providers/ThemeProvider";
 import QueryClientProvider from "../providers/QueryClientProvider";

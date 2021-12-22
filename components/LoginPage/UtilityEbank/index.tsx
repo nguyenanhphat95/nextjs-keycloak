@@ -17,7 +17,7 @@ import icon8 from "public/images/edrawdown.png";
 import icon9 from "public/images/efex.png";
 
 import resources from "pages/assets/translate.json";
-import { LANGUAGE } from "consts";
+import { LANGUAGE } from "commons/constants";
 import _get from "lodash/get";
 createTheme();
 const useStyles = makeStyles(() => ({

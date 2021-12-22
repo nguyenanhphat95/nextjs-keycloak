@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import axiosWrapper from "helpers/axios/axios-instance";
+import axiosWrapper from "commons/helpers/axios/axios-instance";
 import { AxiosResponse } from "axios";
-import { API_DOMAIN } from "consts";
+import { API_DOMAIN } from "commons/constants";
 import * as qs from "query-string";
 
 export interface GetAccessTokenResponse {

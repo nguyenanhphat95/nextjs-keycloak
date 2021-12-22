@@ -12,7 +12,7 @@ import userIcon from "public/images/user.png";
 import passIcon from "public/images/pwd.png";
 import rightIcon from "public/images/rightloging.png";
 import resources from "pages/assets/translate.json";
-import { LANGUAGE } from "consts";
+import { LANGUAGE } from "commons/constants";
 import { toast } from "react-toastify";
 import _get from "lodash/get";
 createTheme();

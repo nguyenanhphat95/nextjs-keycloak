@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { getThemeWithMui } from "styles/utils";
+import { getThemeWithMui } from "styles/themes/utils";
 
 interface Props {
   children: React.ReactNode;

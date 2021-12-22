@@ -8,7 +8,7 @@ import { createTheme } from "@mui/material/styles";
 
 import { ButtonCustom, SelectCustom } from "components/commons";
 
-import { LANGUAGE } from "consts";
+import { LANGUAGE } from "commons/constants";
 import resources from "pages/assets/translate.json";
 
 import notificationIcon from "public/images/Notification.png";

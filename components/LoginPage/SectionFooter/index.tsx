@@ -23,7 +23,7 @@ import whatsappIcon from "public/images/whatsapp.png";
 import twitterIcon from "public/images/twitter.png";
 
 import resources from "pages/assets/translate.json";
-import { LANGUAGE } from "consts";
+import { LANGUAGE } from "commons/constants";
 
 import ToggleItem from "../ToggleItem";
 

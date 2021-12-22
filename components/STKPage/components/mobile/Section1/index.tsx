@@ -13,7 +13,7 @@ import { LIST_NOTIFICATION } from "components/LoginPage/SectionNotification";
 import { LOGIN_STEP } from "pages/stk";
 
 import resources from "pages/assets/translate.json";
-import { LANGUAGE } from "consts";
+import { LANGUAGE } from "commons/constants";
 
 import _get from "lodash/get";
 import _slice from "lodash/slice";

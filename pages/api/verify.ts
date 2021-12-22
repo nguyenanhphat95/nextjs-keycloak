@@ -1,7 +1,7 @@
-import axiosWrapper from "helpers/axios/axios-instance";
+import axiosWrapper from "commons/helpers/axios/axios-instance";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { AxiosResponse } from "axios";
-import { API_DOMAIN } from "consts";
+import { API_DOMAIN } from "commons/constants";
 
 export interface VerifyResponse {
   data: {

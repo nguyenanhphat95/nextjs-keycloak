@@ -33,8 +33,8 @@ import {
   ERROR_CODE,
   generateRequestBody,
   handleErrorWithResponse,
-} from "helpers";
-import { CLIENT_SECRET } from "consts";
+} from "commons/helpers";
+import { CLIENT_SECRET } from "commons/constants";
 
 import desktopPic from "public/images/desktop.png";
 

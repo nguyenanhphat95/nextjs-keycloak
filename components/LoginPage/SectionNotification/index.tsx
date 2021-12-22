@@ -13,7 +13,7 @@ import notifyIcon3 from "public/images/noti3.png";
 import notifyIcon4 from "public/images/noti4.png";
 
 import resources from "pages/assets/translate.json";
-import { LANGUAGE } from "consts";
+import { LANGUAGE } from "commons/constants";
 import _get from "lodash/get";
 
 createTheme();

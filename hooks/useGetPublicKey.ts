@@ -1,4 +1,4 @@
-import axiosWrapper from "helpers/axios/axios-instance";
+import axiosWrapper from "commons/helpers/axios/axios-instance";
 import { useQuery } from "react-query";
 
 const getPublicKey = async () => {

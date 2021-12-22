@@ -11,7 +11,7 @@ import hdBankLogoPic from "public/images/HDBanklogo.png";
 import languageViPic from "public/images/language-vi.png";
 import languageEnPic from "public/images/en.png";
 import downPic from "public/images/down.png";
-import { LANGUAGE } from "consts";
+import { LANGUAGE } from "commons/constants";
 
 createTheme();
 const useStyles = makeStyles((theme: any) => ({

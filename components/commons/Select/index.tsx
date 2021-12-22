@@ -2,7 +2,7 @@ import React, { ChangeEvent, ReactNode } from "react";
 import Select, { SelectProps } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { makeStyles } from "@mui/styles";
-import { OptionSelectType } from "consts/types";
+import { OptionSelectType } from "commons/constants/types";
 import cn from "classnames";
 const useStyles = makeStyles(() => ({
   root: {
@@ -10,7 +10,6 @@ const useStyles = makeStyles(() => ({
     height: 58,
   },
 }));
-
 interface Props<T> extends SelectProps {
   options: T[];
   renderLabel?(prop: T): string | JSX.Element;
