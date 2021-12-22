@@ -5,18 +5,13 @@ import { useRouter } from "next/router";
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import { Grid, Box } from "@mui/material";
-
 import { LoginForm } from "components/LoginPage";
-import { ChooseAccountForm, LoginSuccessForm } from "components/STKPage";
 import { LIST_NOTIFICATION } from "components/LoginPage/SectionNotification";
-
-import { LOGIN_STEP } from "pages/stk";
+import _slice from "lodash/slice";
 
 import resources from "pages/assets/translate.json";
 import { LANGUAGE } from "consts";
-
 import _get from "lodash/get";
-import _slice from "lodash/slice";
 
 createTheme();
 const useStyles = makeStyles(() => ({
@@ -53,13 +48,10 @@ interface Props {
     JSEnscript: any,
     data: { username: string; password: string }
   ) => void;
-  step: string;
-  onChooseAccount: (value: string | number) => void;
-  listAccount: any[];
 }
 
 const SectionMobile1 = (props: Props) => {
-  const { onSubmit, step, onChooseAccount, ...rest } = props;
+  const { onSubmit } = props;
   const classes = useStyles();
 
   const { locale } = useRouter();
@@ -74,11 +66,7 @@ const SectionMobile1 = (props: Props) => {
     <div className={classes.root}>
       <Grid container direction="column" spacing={2}>
         <Grid item>
-          {step === LOGIN_STEP.step1 && <LoginForm onSubmit={_handleSubmit} />}
-          {step === LOGIN_STEP.step2 && (
-            <ChooseAccountForm onSubmit={onChooseAccount} {...rest} />
-          )}
-          {step === LOGIN_STEP.step3 && <LoginSuccessForm />}
+          <LoginForm onSubmit={_handleSubmit} />
         </Grid>
 
         <Grid item>

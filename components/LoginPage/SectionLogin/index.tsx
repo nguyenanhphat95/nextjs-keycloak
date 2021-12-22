@@ -2,10 +2,10 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
+import LoginForm from "../LoginForm";
+import UtilityEbank from "../UtilityEbank";
 import _get from "lodash/get";
-import { UtilityEbank, LoginForm } from "components/LoginPage";
-import { ChooseAccountForm, LoginSuccessForm } from "components/STKPage";
-import { LOGIN_STEP } from "pages/stk";
+
 createTheme();
 const useStyles = makeStyles(() => ({
   root: {
@@ -29,13 +29,10 @@ interface Props {
     JSEnscript: any,
     data: { username: string; password: string }
   ) => void;
-  onChooseAccount: (value: string | number) => void;
-  step: string;
-  listAccount?: any[];
 }
 
 const SectionLogin = (props: Props) => {
-  const { onSubmit, step, onChooseAccount, ...rest } = props;
+  const { onSubmit } = props;
   const classes = useStyles();
 
   const _handleSubmit = (data: { username: string; password: string }) => {
@@ -52,13 +49,7 @@ const SectionLogin = (props: Props) => {
         <Grid item xs={12} md={6}>
           <Grid container justifyContent="center">
             <Grid item xs={12} md={6}>
-              {step === LOGIN_STEP.step1 && (
-                <LoginForm onSubmit={_handleSubmit} />
-              )}
-              {step === LOGIN_STEP.step2 && (
-                <ChooseAccountForm onSubmit={onChooseAccount} {...rest} />
-              )}
-              {step === LOGIN_STEP.step3 && <LoginSuccessForm />}
+              <LoginForm onSubmit={_handleSubmit} />
             </Grid>
           </Grid>
         </Grid>
