@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { Grid, Box } from "@mui/material";
 import { InputCustom, ButtonCustom } from "components/commons";
 import { makeStyles } from "@mui/styles";
-import { createTheme } from "@mui/material/styles";
 
 import userIcon from "public/images/user.png";
 import passIcon from "public/images/pwd.png";
@@ -15,7 +14,6 @@ import resources from "pages/assets/translate.json";
 import { LANGUAGE } from "commons/constants";
 import { toast } from "react-toastify";
 import _get from "lodash/get";
-createTheme();
 const useStyles = makeStyles(() => ({
   root: {
     background: "white",

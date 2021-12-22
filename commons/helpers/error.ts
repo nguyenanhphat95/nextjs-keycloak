@@ -1,4 +1,4 @@
-import { ResponseData } from "models";
+import { ResponseData } from "interfaces/ICommon";
 import { NextRouter } from "next/router";
 
 export const ERROR_CODE = {

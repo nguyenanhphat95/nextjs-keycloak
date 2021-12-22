@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 import { Grid, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { createTheme } from "@mui/material/styles";
 
 import { ButtonCustom, SelectCustom } from "components/commons";
 
@@ -14,7 +13,7 @@ import resources from "pages/assets/translate.json";
 import notificationIcon from "public/images/Notification.png";
 
 import _get from "lodash/get";
-createTheme();
+
 const useStyles = makeStyles(() => ({
   root: {
     background: "white",
@@ -70,7 +69,7 @@ const ChooseAccountForm = (props: Props) => {
           <SelectCustom
             value={account}
             fullWidth
-            options={listAccount}
+            options={listAccount || []}
             placeholder={t.placeholderAccount}
             onChange={(event) => {
               setAccount(_get(event, "target.value"));

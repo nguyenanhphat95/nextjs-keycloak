@@ -1,14 +1,4 @@
-import axios, { AxiosResponse } from "axios";
-import { API_DOMAIN } from "commons/constants";
-
-export interface ListAccountResponse {
-  data: AccountItem[];
-}
-
-export interface AccountItem {
-  id: number;
-  value: string;
-}
+import { ListAccountResponse } from "interfaces/IListAccount";
 
 export const getListAccountApi = async (
   username: string

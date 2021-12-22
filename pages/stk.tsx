@@ -25,9 +25,10 @@ import {
   VerifyBody,
   verifyApi,
   getPublicKey,
-  getListAccountApi,
-  AccountItem,
 } from "services";
+import * as stkService from "services/stkService";
+
+import { AccountItem } from "interfaces/IListAccount";
 
 import {
   ERROR_CODE,
@@ -38,10 +39,9 @@ import { CLIENT_SECRET } from "commons/constants";
 
 import desktopPic from "public/images/desktop.png";
 
-import _get from "lodash/get";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import _get from "lodash/get";
 
 createTheme();
 const useStyles = makeStyles(() => ({
@@ -127,7 +127,7 @@ const STKPage = () => {
     data: { username: string; password: string }
   ) => {
     setLoginStep(LOGIN_STEP.step2);
-    getListAccountApi(data.username).then((res) => {
+    stkService.getListAccountApi(data.username).then((res) => {
       setListAccount(res.data);
     });
 

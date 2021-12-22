@@ -10,7 +10,7 @@ import { LIST_NOTIFICATION } from "components/LoginPage/SectionNotification";
 import _slice from "lodash/slice";
 
 import resources from "pages/assets/translate.json";
-import { LANGUAGE } from "commons/constants";
+import { LANGUAGE } from "consts";
 import _get from "lodash/get";
 
 createTheme();

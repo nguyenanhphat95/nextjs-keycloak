@@ -1,9 +1,7 @@
 import React from "react";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { makeStyles } from "@mui/styles";
-import { createTheme } from "@mui/material/styles";
 
-createTheme();
 const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
