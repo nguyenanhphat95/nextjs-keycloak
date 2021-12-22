@@ -28,6 +28,11 @@ const useStyles = makeStyles(() => ({
     borderColor: "#333333 !important",
     color: "#333333 !important",
   },
+  textInstruction: {
+    color: "#1890FF",
+    fontWeight: 500,
+    textAlign: "center",
+  },
 }));
 
 const LoginSuccessForm = () => {
@@ -73,6 +78,13 @@ const LoginSuccessForm = () => {
             </ButtonCustom>
           </Grid>
         </Grid>
+
+        <Box
+          mt={2}
+          className={classes.textInstruction}
+        >
+          Hướng dẫn nạp tiền tài khoản thanh toán trực tuyến
+        </Box>
       </Box>
     </Box>
   );

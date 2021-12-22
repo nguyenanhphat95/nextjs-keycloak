@@ -11,7 +11,8 @@
       "title": "Đăng nhập thành công eBanking",
       "content": "Chúc mừng bạn đã đăng nhập thành công dịch vụ eBanking HDBank. Vui lòng tiếp tục với SBH để hoàn tất thanh toán.",
       "btnContinue": "Tiếp tục",
-      "btnDownApp": "Tải app HDBank"
+      "btnDownApp": "Tải app HDBank",
+      "textInstruction": "Hướng dẫn nạp tiền tài khoản thanh toán trực tuyến"
     },
     "loginForm": {
       "title": "Đăng nhập eBanking",
@@ -98,7 +99,8 @@
       "title": "Successfully logged in to eBanking",
       "content": "Congratulations, you have successfully logged into HDBank eBanking service. Please proceed to SBH to complete payment.",
       "btnContinue": "Continue",
-      "btnDownApp": "Download app"
+      "btnDownApp": "Download app",
+      "textInstruction": "Instructions to recharge online payment accounts"
     },
     "loginForm": {
       "title": "Login to eBanking",
