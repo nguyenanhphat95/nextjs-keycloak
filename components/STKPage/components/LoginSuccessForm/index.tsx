@@ -21,8 +21,9 @@ const useStyles = makeStyles(() => ({
     borderRadius: 20,
   },
   title: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 500,
+    textAlign: "center",
   },
   btnContinue: {
     borderColor: "#333333 !important",
@@ -79,11 +80,8 @@ const LoginSuccessForm = () => {
           </Grid>
         </Grid>
 
-        <Box
-          mt={2}
-          className={classes.textInstruction}
-        >
-          Hướng dẫn nạp tiền tài khoản thanh toán trực tuyến
+        <Box mt={2} className={classes.textInstruction}>
+          {t.textInstruction}
         </Box>
       </Box>
     </Box>
