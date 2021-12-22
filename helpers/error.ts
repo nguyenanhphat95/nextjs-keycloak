@@ -8,6 +8,7 @@ export const ERROR_CODE = {
   UserNotExist: "03",
   SessionIdNotFound: "04",
   FormatMessageInvalid: "05",
+  PasswordExpired: "06",
   SystemError: "99",
 };
 

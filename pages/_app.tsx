@@ -4,11 +4,9 @@ import type { AppProps } from "next/app";
 import { CacheProvider } from "@emotion/react";
 import { createEmotionCache } from "styles/utils";
 import CssBaseline from "@mui/material/CssBaseline";
-
 import ThemeProvider from "../providers/ThemeProvider";
 import QueryClientProvider from "../providers/QueryClientProvider";
-
-import "../styles.css";
+import "./../styles/globals.css";
 const clientSideEmotionCache = createEmotionCache();
 
 type NextPageWithLayout = NextPage & {

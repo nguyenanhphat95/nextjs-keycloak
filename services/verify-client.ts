@@ -17,7 +17,7 @@ export interface VerifyClientBody {
 
 export const verifyClientApi = async (body: VerifyClientBody) => {
   const resp: AxiosResponse<VerifyUserResponse> = await axios.post(
-    "/auth/api/verifyUser",
+    "/api/verifyUser",
     body
   );
   return resp;
