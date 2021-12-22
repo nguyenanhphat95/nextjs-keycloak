@@ -217,86 +217,86 @@ const palette: PaletteOptions = {
 
 const theme: Readonly<ThemeOptions> = {
   palette,
-  typography: {
-    fontSize: 16,
-    h1: {
-      fontSize: "3.6rem",
-      fontWeight: 300,
-      letterSpacing: "-1.5px",
-      textTransform: "none",
-    },
-    h2: {
-      fontSize: "3.2rem",
-      fontWeight: 300,
-      letterSpacing: "-0.5px",
-      textTransform: "none",
-    },
-    h3: {
-      fontSize: "3rem",
-      fontWeight: 400,
-      letterSpacing: "0px",
-      textTransform: "none",
-    },
-    h4: {
-      fontSize: "2.8rem",
-      fontWeight: 400,
-      letterSpacing: "0.25px",
-      textTransform: "none",
-    },
-    h5: {
-      fontSize: "2.6rem",
-      fontWeight: 300,
-      letterSpacing: "0px",
-      textTransform: "none",
-    },
-    h6: {
-      fontSize: "2.4rem",
-      fontWeight: 500,
-      letterSpacing: "0.15px",
-      textTransform: "none",
-    },
-    subtitle1: {
-      fontSize: "2.2rem",
-      fontWeight: 400,
-      letterSpacing: "0.15px",
-      textTransform: "none",
-    },
-    subtitle2: {
-      fontSize: "2rem",
-      fontWeight: 500,
-      letterSpacing: "0.1px",
-      textTransform: "none",
-    },
-    body1: {
-      fontSize: "1.8rem",
-      fontWeight: 400,
-      letterSpacing: "0.15px",
-      textTransform: "none",
-    },
-    body2: {
-      fontSize: "1.6rem",
-      fontWeight: 400,
-      letterSpacing: "0.15px",
-      textTransform: "none",
-    },
-    button: {
-      fontSize: "1.8rem",
-      fontWeight: 500,
-      letterSpacing: "0.4px",
-      textTransform: "capitalize",
-    },
-    caption: {
-      fontSize: "1.4rem",
-      fontWeight: 400,
-      letterSpacing: "0.4px",
-      textTransform: "none",
-    },
-    overline: {
-      fontSize: "1.4rem",
-      fontWeight: 400,
-      letterSpacing: "1px",
-      textTransform: "capitalize",
-    },
-  },
+  // typography: {
+  //   fontSize: 16,
+  //   h1: {
+  //     fontSize: "3.6rem",
+  //     fontWeight: 300,
+  //     letterSpacing: "-1.5px",
+  //     textTransform: "none",
+  //   },
+  //   h2: {
+  //     fontSize: "3.2rem",
+  //     fontWeight: 300,
+  //     letterSpacing: "-0.5px",
+  //     textTransform: "none",
+  //   },
+  //   h3: {
+  //     fontSize: "3rem",
+  //     fontWeight: 400,
+  //     letterSpacing: "0px",
+  //     textTransform: "none",
+  //   },
+  //   h4: {
+  //     fontSize: "2.8rem",
+  //     fontWeight: 400,
+  //     letterSpacing: "0.25px",
+  //     textTransform: "none",
+  //   },
+  //   h5: {
+  //     fontSize: "2.6rem",
+  //     fontWeight: 300,
+  //     letterSpacing: "0px",
+  //     textTransform: "none",
+  //   },
+  //   h6: {
+  //     fontSize: "2.4rem",
+  //     fontWeight: 500,
+  //     letterSpacing: "0.15px",
+  //     textTransform: "none",
+  //   },
+  //   subtitle1: {
+  //     fontSize: "2.2rem",
+  //     fontWeight: 400,
+  //     letterSpacing: "0.15px",
+  //     textTransform: "none",
+  //   },
+  //   subtitle2: {
+  //     fontSize: "2rem",
+  //     fontWeight: 500,
+  //     letterSpacing: "0.1px",
+  //     textTransform: "none",
+  //   },
+  //   body1: {
+  //     fontSize: "1.8rem",
+  //     fontWeight: 400,
+  //     letterSpacing: "0.15px",
+  //     textTransform: "none",
+  //   },
+  //   body2: {
+  //     fontSize: "1.6rem",
+  //     fontWeight: 400,
+  //     letterSpacing: "0.15px",
+  //     textTransform: "none",
+  //   },
+  //   button: {
+  //     fontSize: "1.8rem",
+  //     fontWeight: 500,
+  //     letterSpacing: "0.4px",
+  //     textTransform: "capitalize",
+  //   },
+  //   caption: {
+  //     fontSize: "1.4rem",
+  //     fontWeight: 400,
+  //     letterSpacing: "0.4px",
+  //     textTransform: "none",
+  //   },
+  //   overline: {
+  //     fontSize: "1.4rem",
+  //     fontWeight: 400,
+  //     letterSpacing: "1px",
+  //     textTransform: "capitalize",
+  //   },
+  // },
 };
 export default theme;
