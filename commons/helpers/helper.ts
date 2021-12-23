@@ -17,31 +17,27 @@ export const isNumber = (val: number): boolean => {
 };
 
 export const startTimer = async (
-  duration: any = 59
-  // display: HTMLElement
+  duration: number = 59,
+  elementDisplay: HTMLElement
 ) => {
   return new Promise((resolve) => {
-    let timer: any = duration;
-    let minutes: any;
-    let seconds: any;
+    let timer: number = duration;
+    let minutes: number | string;
+    let seconds: number | string;
     const x = setInterval(() => {
       minutes = parseInt((timer / 60).toString(), 10);
       seconds = parseInt((timer % 60).toString(), 10);
-      console.log("typeof----:", typeof minutes);
-      console.log("minutes----:", minutes);
-      console.log("-------");
+
       minutes = minutes < 10 ? "0" + minutes : minutes;
       seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      // if (+minutes) {
-      //   display.textContent = `(${minutes} : ${seconds}s)`;
-      // } else {
-      //   display.textContent = `(${seconds}s)`;
-      // }
+      if (+minutes) {
+        elementDisplay.textContent = `${minutes}:${seconds}`;
+      } else {
+        elementDisplay.textContent = `${seconds}s`;
+      }
       timer--;
-
       if (timer < 0) {
-        // display.textContent = "";
+        elementDisplay.textContent = "";
         resolve(true);
         clearInterval(x);
       }

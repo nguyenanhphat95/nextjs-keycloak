@@ -7,7 +7,7 @@ import { createTheme } from "@mui/material/styles";
 import { Grid, Box } from "@mui/material";
 
 import { LoginForm } from "components/LoginPage";
-import { ChooseAccountForm, LoginSuccessForm } from "components/STKPage";
+import { ChooseAccountForm, LoginSuccessForm, ConfirmOTP } from "components/STKPage";
 import { LIST_NOTIFICATION } from "components/LoginPage/SectionNotification";
 
 import { LOGIN_STEP } from "pages/stk";
@@ -55,11 +55,13 @@ interface Props {
   ) => void;
   step: string;
   onChooseAccount: (value: string | number) => void;
+  onConfirmOTP: (otp: string) => void;
+
   listAccount: any[];
 }
 
 const SectionMobile1 = (props: Props) => {
-  const { onSubmit, step, onChooseAccount, ...rest } = props;
+  const { onSubmit, step, onChooseAccount, onConfirmOTP, ...rest } = props;
   const classes = useStyles();
 
   const { locale } = useRouter();
@@ -78,7 +80,8 @@ const SectionMobile1 = (props: Props) => {
           {step === LOGIN_STEP.step2 && (
             <ChooseAccountForm onSubmit={onChooseAccount} {...rest} />
           )}
-          {step === LOGIN_STEP.step3 && <LoginSuccessForm />}
+          {step === LOGIN_STEP.step3 && <ConfirmOTP onSubmit={onConfirmOTP} />}
+          {step === LOGIN_STEP.step4 && <LoginSuccessForm />}
         </Grid>
 
         <Grid item>

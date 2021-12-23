@@ -34,12 +34,13 @@ interface Props {
     data: { username: string; password: string }
   ) => void;
   onChooseAccount: (value: string | number) => void;
+  onConfirmOTP: (otp: string) => void;
   step: string;
   listAccount?: any[];
 }
 
 const SectionLogin = (props: Props) => {
-  const { onSubmit, step, onChooseAccount, ...rest } = props;
+  const { onSubmit, step, onConfirmOTP, onChooseAccount, ...rest } = props;
   const classes = useStyles();
 
   const _handleSubmit = (data: { username: string; password: string }) => {
@@ -62,7 +63,9 @@ const SectionLogin = (props: Props) => {
               {step === LOGIN_STEP.step2 && (
                 <ChooseAccountForm onSubmit={onChooseAccount} {...rest} />
               )}
-              {step === LOGIN_STEP.step3 && <ConfirmOTP />}
+              {step === LOGIN_STEP.step3 && (
+                <ConfirmOTP onSubmit={onConfirmOTP} />
+              )}
               {step === LOGIN_STEP.step4 && <LoginSuccessForm />}
             </Grid>
           </Grid>

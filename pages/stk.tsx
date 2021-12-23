@@ -81,7 +81,7 @@ const STKPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [loginStep, setLoginStep] = useState(LOGIN_STEP.step3);
+  const [loginStep, setLoginStep] = useState(LOGIN_STEP.step1);
   const [listAccount, setListAccount] = useState<AccountItem[]>([]);
   const accountRef = useRef<string | number>("");
 
@@ -106,7 +106,7 @@ const STKPage = () => {
       ...generateRequestBody(),
       data: {
         clientId: query.client_id as string,
-        clientSecret: CLIENT_SECRET,
+        clientSecret: CLIENT_SECRET as string,
         redirectUri: query.redirect_uri as string,
       },
     };
@@ -170,6 +170,10 @@ const STKPage = () => {
     setLoginStep(LOGIN_STEP.step3);
   };
 
+  const _handleConfirmOTP = (otp: string) => {
+    setLoginStep(LOGIN_STEP.step4);
+  };
+
   return (
     <Grid container direction="column">
       <ToastContainer
@@ -197,6 +201,7 @@ const STKPage = () => {
               step={loginStep}
               onChooseAccount={_handleChooseAccount}
               onSubmit={_handleSubmitForm}
+              onConfirmOTP={_handleConfirmOTP}
             />
           </Grid>
           <Grid item xs={12}>
@@ -220,6 +225,7 @@ const STKPage = () => {
               step={loginStep}
               onSubmit={_handleSubmitForm}
               onChooseAccount={_handleChooseAccount}
+              onConfirmOTP={_handleConfirmOTP}
             />
           </Grid>
 
