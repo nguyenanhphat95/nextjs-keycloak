@@ -4,7 +4,11 @@ import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import _get from "lodash/get";
 import { UtilityEbank, LoginForm } from "components/LoginPage";
-import { ChooseAccountForm, LoginSuccessForm } from "components/STKPage";
+import {
+  ChooseAccountForm,
+  LoginSuccessForm,
+  ConfirmOTP,
+} from "components/STKPage";
 import { LOGIN_STEP } from "pages/stk";
 createTheme();
 const useStyles = makeStyles(() => ({
@@ -58,7 +62,8 @@ const SectionLogin = (props: Props) => {
               {step === LOGIN_STEP.step2 && (
                 <ChooseAccountForm onSubmit={onChooseAccount} {...rest} />
               )}
-              {step === LOGIN_STEP.step3 && <LoginSuccessForm />}
+              {step === LOGIN_STEP.step3 && <ConfirmOTP />}
+              {step === LOGIN_STEP.step4 && <LoginSuccessForm />}
             </Grid>
           </Grid>
         </Grid>

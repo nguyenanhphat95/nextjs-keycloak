@@ -67,9 +67,10 @@ const ERROR_MESSAGE_VERIFY_USER = {
 };
 
 export const LOGIN_STEP = {
-  step1: "step1",
-  step2: "step2",
-  step3: "step3",
+  step1: "stepLogin",
+  step2: "stepChooseAccount",
+  step3: "stepConfirmOtp",
+  step4: "stepLoginSuccess",
 };
 
 const STKPage = () => {
@@ -80,7 +81,7 @@ const STKPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [loginStep, setLoginStep] = useState(LOGIN_STEP.step1);
+  const [loginStep, setLoginStep] = useState(LOGIN_STEP.step3);
   const [listAccount, setListAccount] = useState<AccountItem[]>([]);
   const accountRef = useRef<string | number>("");
 
