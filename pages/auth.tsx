@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from "react";
+import React, { useEffect, useCallback } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -30,7 +30,7 @@ import {
   generateRequestBody,
   handleErrorWithResponse,
 } from "helpers";
-import { CLIENT_SECRET, REDIRECT_URI } from "consts";
+import { CLIENT_SECRET } from "consts";
 
 import desktopPic from "public/images/desktop.png";
 
@@ -91,7 +91,7 @@ const AuthPage = () => {
       ...generateRequestBody(),
       data: {
         clientId: query.client_id as string,
-        clientSecret: CLIENT_SECRET,
+        clientSecret: CLIENT_SECRET as string,
         redirectUri: query.redirect_uri as string,
       },
     };
@@ -142,7 +142,7 @@ const AuthPage = () => {
         }
         // Redirect to redirect uri
         router.push({
-          pathname: REDIRECT_URI,
+          pathname: query.redirect_uri as string,
           query: {
             code,
           },

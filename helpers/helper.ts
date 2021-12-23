@@ -6,8 +6,8 @@ export const generateRequestBody = () => {
     request: {
       requestId: uuidv4(),
       requestTime: "",
-      partnerId: PARTNER_ID,
-      signature: SIGNATURE,
+      partnerId: PARTNER_ID as string,
+      signature: SIGNATURE as string,
     },
   };
 };
