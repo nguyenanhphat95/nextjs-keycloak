@@ -23,11 +23,12 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface Props {
-  onFinish: (otp: string) => void;
+  onFinish?: (otp: string) => void;
+  onChange?: (otp: string) => void;
 }
 
 const InputOTP = (props: Props) => {
-  const { onFinish } = props;
+  const { onFinish, onChange } = props;
 
   const classes = useStyles();
   const otpEl1 = useRef<HTMLInputElement>(null);
@@ -62,8 +63,8 @@ const InputOTP = (props: Props) => {
         }
         otpStr += _get(finalValue, [key]);
       });
-
-      if (finish) {
+      onChange && onChange(otpStr);
+      if (finish && onFinish) {
         onFinish(otpStr);
       }
     }

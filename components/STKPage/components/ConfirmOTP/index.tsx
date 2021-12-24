@@ -10,7 +10,7 @@ import { LANGUAGE } from "commons/constants";
 import resources from "pages/assets/translate.json";
 
 import cn from "classnames";
-import _get from 'lodash/get';
+import _get from "lodash/get";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -71,21 +71,21 @@ const ConfirmOTP = (props: Props) => {
           {t.title}
         </Grid>
         <Grid item className={classes.caption}>
-        {t.content}
+          {t.content}
         </Grid>
         <Grid item>
           <Grid direction="column" container spacing={1}>
             <Grid item className={cn(classes.textCenter, classes.label)}>
-            {t.label}
+              {t.label}
             </Grid>
             <Grid item className={cn(classes.textCenter)}>
-              <InputOTP onFinish={setOtp} />
+              <InputOTP onChange={setOtp} />
             </Grid>
             <Grid item className={cn(classes.textCenter, classes.caption)}>
-            {t.question}
+              {t.question}
             </Grid>
             <Grid item className={cn(classes.textCenter, classes.textLink)}>
-            {t.resendOTP}
+              {t.resendOTP}
             </Grid>
             <Grid item className={cn(classes.textCenter)}>
               <span className={classes.textTimer} ref={timerRef} />
@@ -98,10 +98,10 @@ const ConfirmOTP = (props: Props) => {
             variant="contained"
             fullWidth
             color="secondary"
-            disabled={!otp}
+            disabled={otp.length < 5}
             onClick={() => onSubmit(otp)}
           >
-           {t.btnSubmit}
+            {t.btnSubmit}
           </ButtonCustom>
         </Grid>
       </Grid>
