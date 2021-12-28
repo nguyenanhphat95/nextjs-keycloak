@@ -1,4 +1,10 @@
 import axios, { AxiosResponse } from "axios";
+import {
+  CHANNEL_SBH,
+  IS_REQ_CHAL_CODE_SBH,
+  NARRATIVE_SBH,
+  SERVICE_CODE_SBH,
+} from "commons/constants";
 import { CreateOTPRequest, CreateOTPResponse } from "interfaces/ICreateOTP";
 import {
   ListAccountResponse,
@@ -11,8 +17,7 @@ export const getListAccountApi = async (clientNo: string) => {
   const body: ListAccountRequest = {
     requestId: uuidv4() as string,
     data: {
-      // clientNo,
-      clientNo: "00012132",
+      clientNo,
     },
   };
   const resp: AxiosResponse<ListAccountResponse> = await axios.post(
@@ -26,15 +31,15 @@ export const createOTPApi = async (userId: string) => {
   const body: CreateOTPRequest = {
     requestId: uuidv4() as string,
     data: {
-      channel: process.env.CHANNEL_CLIENT as string,
-      serviceCode: process.env.SERVICE_CODE_CLIENT as string,
+      channel: CHANNEL_SBH as string,
+      serviceCode: SERVICE_CODE_SBH as string,
       userId,
       serialNo: "",
-      narrative: process.env.NARRATIVE_CLIENT as string,
+      narrative: NARRATIVE_SBH as string,
       language: "vi",
       clientImei: "",
       partner: "",
-      isReqChalCode: process.env.IS_REQ_CHAL_CODE_CLIENT as string,
+      isReqChalCode: IS_REQ_CHAL_CODE_SBH as string,
       mediaType: "",
     },
   };
@@ -49,11 +54,11 @@ export const verifyOTPApi = async (userId: string, otp: string) => {
   const body: VerifyOTPRequest = {
     requestId: uuidv4() as string,
     data: {
-      channel: process.env.CHANNEL_CLIENT as string,
-      serviceCode: process.env.SERVICE_CODE_CLIENT as string,
+      channel: CHANNEL_SBH as string,
+      serviceCode: SERVICE_CODE_SBH as string,
       userId,
       serialNo: "",
-      narrative: process.env.NARRATIVE_CLIENT as string,
+      narrative: NARRATIVE_SBH as string,
       mediaType: "",
       challengeCode: "",
       otp,

@@ -131,9 +131,8 @@ const STKPage = () => {
   ) => {
     usernameRef.current = data.username;
     stkService.getListAccountApi(data.username).then((res) => {
-      console.log('res-----:', res);
-      // setLoginStep(LOGIN_STEP.step2);
-      // setListAccount(_get(res, "data.data", []));
+      setLoginStep(LOGIN_STEP.step2);
+      setListAccount(_get(res, "data.data", []));
     });
     // const resp = await getPublicKey();
     // const publicKey = _get(resp, "data.data.key");
