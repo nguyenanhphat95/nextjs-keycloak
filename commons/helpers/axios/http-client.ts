@@ -7,6 +7,7 @@ import {
   RequestConfigs,
 } from "./types";
 import { applyInterceptors } from "./utils";
+const https = require("https");
 
 interface HttpClientAdaptor {
   get<T>(url: string, configs?: Omit<RequestConfigs, "data">): Promise<T>;
@@ -51,7 +52,13 @@ function createHttpClient(
   configs: GetQueryClientParams,
   options?: HttpClientOptions
 ) {
-  const ins = axios.create({ ...defaultConfigs, ...configs });
+  const ins = axios.create({
+    httpsAgent: new https.Agent({
+      rejectUnauthorized: false,
+    }),
+    ...defaultConfigs,
+    ...configs,
+  });
 
   if (!options) {
     return ins;

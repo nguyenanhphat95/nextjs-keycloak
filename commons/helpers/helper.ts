@@ -33,7 +33,7 @@ export const startTimer = async (
       if (+minutes) {
         elementDisplay.textContent = `${minutes}:${seconds}`;
       } else {
-        elementDisplay.textContent = `${seconds}s`;
+        elementDisplay.textContent = `${seconds}`;
       }
       timer--;
       if (timer < 0) {

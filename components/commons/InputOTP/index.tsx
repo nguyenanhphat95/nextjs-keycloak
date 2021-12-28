@@ -38,6 +38,7 @@ const InputOTP = (props: Props) => {
     otp3: "",
     otp4: "",
     otp5: "",
+    otp6: "",
   });
 
   useEffect(() => {
@@ -82,7 +83,7 @@ const InputOTP = (props: Props) => {
       const next = _get(e, "target.tabIndex");
       const value = e.key;
 
-      if (next < 5 && isNumber(+value)) {
+      if (next < 6 && isNumber(+value)) {
         const element = _get(e, `target.form.elements[${next}]`);
         element && element.focus();
       }
@@ -157,6 +158,19 @@ const InputOTP = (props: Props) => {
             value={otpValue.otp5}
             onChange={(e) => _handleChange("otp5", e)}
             tabIndex={5}
+            maxLength={1}
+            onKeyUp={_handleFocus}
+          />
+        </Grid>
+        <Grid item xs="auto">
+          <input
+            name="otp6"
+            type="text"
+            autoComplete="off"
+            className={classes.otpInput}
+            value={otpValue.otp6}
+            onChange={(e) => _handleChange("otp6", e)}
+            tabIndex={6}
             maxLength={1}
             onKeyUp={_handleFocus}
           />

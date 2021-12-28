@@ -33,7 +33,13 @@ function getLabel<T extends OptionSelectType>({
 }
 
 const SelectCustom = <T extends OptionSelectType>(props: Props<T>) => {
-  const { options, renderLabel, className, placeholder, ...rest } = props;
+  const {
+    options,
+    renderLabel,
+    className,
+    placeholder,
+    ...rest
+  } = props;
   const classes = useStyles();
   return (
     <Select displayEmpty {...rest} className={cn(classes.root, className)}>

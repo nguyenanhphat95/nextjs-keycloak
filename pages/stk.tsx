@@ -82,8 +82,10 @@ const STKPage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [loginStep, setLoginStep] = useState(LOGIN_STEP.step1);
+
   const [listAccount, setListAccount] = useState<AccountItem[]>([]);
   const accountRef = useRef<string | number>("");
+  const usernameRef = useRef<string>("");
 
   const _checkHaveParam = useCallback((query: ParsedUrlQuery) => {
     if (
@@ -127,11 +129,12 @@ const STKPage = () => {
     JSEnscript: any,
     data: { username: string; password: string }
   ) => {
-    setLoginStep(LOGIN_STEP.step2);
+    usernameRef.current = data.username;
     stkService.getListAccountApi(data.username).then((res) => {
-      setListAccount(res.data);
+      console.log('res-----:', res);
+      // setLoginStep(LOGIN_STEP.step2);
+      // setListAccount(_get(res, "data.data", []));
     });
-
     // const resp = await getPublicKey();
     // const publicKey = _get(resp, "data.data.key");
 
@@ -165,13 +168,41 @@ const STKPage = () => {
     //   .catch((err) => console.log(err));
   };
 
+  const _sendOTP = () => {
+    stkService
+      .createOTPApi(usernameRef.current)
+      .then((res) => {
+        if (_get(res, "data.data.userId")) {
+          toast.success("Send OTP success, please check your phone");
+          setLoginStep(LOGIN_STEP.step3);
+        }
+      })
+      .catch((err) => {
+        toast.error("Send OTP failed");
+        console.log(err);
+      });
+  };
+
   const _handleChooseAccount = (account: string | number) => {
     accountRef.current = account;
-    setLoginStep(LOGIN_STEP.step3);
+    _sendOTP();
   };
 
   const _handleConfirmOTP = (otp: string) => {
-    setLoginStep(LOGIN_STEP.step4);
+    stkService
+      .verifyOTPApi(usernameRef.current, otp)
+      .then((res) => {
+        console.log("confirmOTP", res.data);
+        if (_get(res, "data.data.userId")) {
+          toast.success("Confirm OTP success");
+          setLoginStep(LOGIN_STEP.step4);
+        }
+        toast.error(_get(res, "data.data.resultMessage", "Invalid OTP"));
+      })
+      .catch((err) => {
+        toast.error("Send OTP failed");
+        console.log(err);
+      });
   };
 
   return (
@@ -226,6 +257,7 @@ const STKPage = () => {
               onSubmit={_handleSubmitForm}
               onChooseAccount={_handleChooseAccount}
               onConfirmOTP={_handleConfirmOTP}
+              onSendOTP={_sendOTP}
             />
           </Grid>
 
@@ -234,7 +266,6 @@ const STKPage = () => {
           </Grid>
         </>
       )}
-
       <SectionFooter />
     </Grid>
   );

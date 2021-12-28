@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 
 import { Grid, Box } from "@mui/material";
@@ -41,28 +41,45 @@ const useStyles = makeStyles(() => ({
   textTimer: {
     color: "#BE1128",
   },
+  disabledResentOTP: {
+    color: "#ccc",
+    cursor: "not-allowed",
+  },
 }));
 
 interface Props {
   onSubmit: (otp: string) => void;
+  onSendOTP?: () => void;
 }
 
 const ConfirmOTP = (props: Props) => {
-  const { onSubmit } = props;
-
+  const { onSubmit, onSendOTP } = props;
   const classes = useStyles();
   const timerRef = useRef<any>();
+
   const [otp, setOtp] = useState("");
+  const [isResendValid, setIsResendValid] = useState(false);
 
   const { locale } = useRouter();
   const t = _get(resources, [locale || LANGUAGE.VI, "confirmOTP"]);
 
-  useEffect(() => {
-    const timer = async () => {
-      await startTimer(119, timerRef.current);
-    };
-    timer();
+  const onCallTimer = useCallback(async () => {
+    const isDone = await startTimer(10, timerRef.current);
+    isDone && setIsResendValid(true);
   }, []);
+
+  useEffect(() => {
+    onCallTimer();
+  }, []);
+
+  const _handleResendOTP = () => {
+    if (!isResendValid || !onSendOTP) {
+      return;
+    }
+    onSendOTP();
+    setIsResendValid(false);
+    onCallTimer();
+  };
 
   return (
     <Box py={3} px={2} className={classes.root}>
@@ -84,7 +101,15 @@ const ConfirmOTP = (props: Props) => {
             <Grid item className={cn(classes.textCenter, classes.caption)}>
               {t.question}
             </Grid>
-            <Grid item className={cn(classes.textCenter, classes.textLink)}>
+            <Grid
+              onClick={_handleResendOTP}
+              item
+              className={cn(
+                classes.textCenter,
+                classes.textLink,
+                !isResendValid && classes.disabledResentOTP
+              )}
+            >
               {t.resendOTP}
             </Grid>
             <Grid item className={cn(classes.textCenter)}>

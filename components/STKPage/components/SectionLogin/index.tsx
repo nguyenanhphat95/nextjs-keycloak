@@ -35,6 +35,7 @@ interface Props {
   ) => void;
   onChooseAccount: (value: string | number) => void;
   onConfirmOTP: (otp: string) => void;
+  onSendOTP?: () => void;
   step: string;
   listAccount?: any[];
 }
@@ -64,7 +65,7 @@ const SectionLogin = (props: Props) => {
                 <ChooseAccountForm onSubmit={onChooseAccount} {...rest} />
               )}
               {step === LOGIN_STEP.step3 && (
-                <ConfirmOTP onSubmit={onConfirmOTP} />
+                <ConfirmOTP onSubmit={onConfirmOTP} {...rest} />
               )}
               {step === LOGIN_STEP.step4 && <LoginSuccessForm />}
             </Grid>
