@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useContext } from "react";
 import Script from "next/script";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import resources from "pages/assets/translate.json";
 import { LANGUAGE } from "commons/constants";
 import { toast } from "react-toastify";
 import _get from "lodash/get";
+import STKContext from "components/STKPage/contexts/STKContextValue";
 const useStyles = makeStyles(() => ({
   root: {
     background: "white",
@@ -69,6 +70,8 @@ const LoginForm = (props: Props) => {
     username: "",
     password: "",
   });
+
+  const { loadingBtnSubmit } = useContext(STKContext);
 
   const _handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -143,6 +146,7 @@ const LoginForm = (props: Props) => {
                 variant="contained"
                 color="secondary"
                 fullWidth
+                loading={loadingBtnSubmit}
                 onClick={_handleSubmit}
               >
                 {t?.btnSubmit}

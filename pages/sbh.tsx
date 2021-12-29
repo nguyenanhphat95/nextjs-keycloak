@@ -38,6 +38,7 @@ import {
 import { CLIENT_SECRET } from "commons/constants";
 
 import desktopPic from "public/images/desktop.png";
+import STKContext from "components/STKPage/contexts/STKContextValue";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -73,7 +74,7 @@ export const LOGIN_STEP = {
   step4: "stepLoginSuccess",
 };
 
-const STKPage = () => {
+const SBHPage = () => {
   const classes = useStyles();
   const router = useRouter();
   const query = router.query;
@@ -82,95 +83,97 @@ const STKPage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [loginStep, setLoginStep] = useState(LOGIN_STEP.step1);
-
   const [listAccount, setListAccount] = useState<AccountItem[]>([]);
+  const [loading, setLoading] = useState({
+    loadingBtnSubmit: false,
+  });
+
   const accountRef = useRef<string | number>("");
   const usernameRef = useRef<string>("");
+  const passwordRef = useRef<string>("");
 
-  const _checkHaveParam = useCallback((query: ParsedUrlQuery) => {
-    if (
-      !query.client_id ||
-      !query.redirect_uri ||
-      !query.response_type ||
-      !query.scope
-    ) {
-      return false;
-    }
-    return true;
-  }, []);
+  // const _checkHaveParam = useCallback((query: ParsedUrlQuery) => {
+  //   if (
+  //     !query.client_id ||
+  //     !query.redirect_uri ||
+  //     !query.response_type ||
+  //     !query.scope
+  //   ) {
+  //     return false;
+  //   }
+  //   return true;
+  // }, []);
 
-  useEffect(() => {
-    if (!_checkHaveParam(query)) {
-      return;
-    }
+  // useEffect(() => {
+  //   if (!_checkHaveParam(query)) {
+  //     return;
+  //   }
 
-    const body: VerifyClientBody = {
-      ...generateRequestBody(),
-      data: {
-        clientId: query.client_id as string,
-        clientSecret: CLIENT_SECRET as string,
-        redirectUri: query.redirect_uri as string,
-      },
-    };
-    verifyClientApi(body)
-      .then((resp) => {
-        handleErrorWithResponse(router, resp.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [query, _checkHaveParam, router]);
+  //   const body: VerifyClientBody = {
+  //     ...generateRequestBody(),
+  //     data: {
+  //       clientId: query.client_id as string,
+  //       clientSecret: CLIENT_SECRET as string,
+  //       redirectUri: query.redirect_uri as string,
+  //     },
+  //   };
+  //   verifyClientApi(body)
+  //     .then((resp) => {
+  //       handleErrorWithResponse(router, resp.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [query, _checkHaveParam, router]);
 
   // if (!_checkHaveParam(query)) {
   //   return <div>Invalid params</div>;
   // }
 
   const _handleSubmitForm = async (
-    JSEnscript: any,
+    _: any,
     data: { username: string; password: string }
   ) => {
-    usernameRef.current = data.username;
-    stkService.getListAccountApi(data.username).then((res) => {
-      setLoginStep(LOGIN_STEP.step2);
-      setListAccount(_get(res, "data.data", []));
-    });
-    // const resp = await getPublicKey();
-    // const publicKey = _get(resp, "data.data.key");
+    const resp = await getPublicKey();
+    const publicKey = _get(resp, "data.data.key");
 
-    // if (!publicKey) {
-    //   toast.error("Get public key error");
-    //   return;
-    // }
+    if (!publicKey) {
+      toast.error("Get public key error");
+      return;
+    }
+    _toggleLoading("loadingBtnSubmit", true);
+    stkService
+      .verifySBH(data, publicKey)
+      .then((res) => {
+        const responseCode = _get(res, "data.response.responseCode");
+        _toggleLoading("loadingBtnSubmit");
 
-    // const crypt = new JSEnscript();
-    // crypt.setPublicKey(publicKey);
-    // const credential = crypt.encrypt(JSON.stringify(data));
+        if (responseCode === ERROR_CODE.Success) {
+          stkService.getListAccountApi(data.username).then((res) => {
+            setListAccount(_get(res, "data.data", []));
+          });
+          usernameRef.current = data.username;
+          passwordRef.current = data.password;
 
-    // const body: VerifyBody = {
-    //   ...generateRequestBody(),
-    //   data: {
-    //     credential,
-    //     key: publicKey,
-    //   },
-    // };
-
-    // verifyApi(body)
-    //   .then((res) => {
-    //     const code = _get(res, "data.data.code");
-    //     if (!code) {
-    //       const errorCode = _get(res, "data.response.responseCode");
-    //       toast.error(ERROR_MESSAGE_VERIFY_USER[errorCode] || "Login failed");
-    //       return;
-    //     }
-    //     setLoginStep(LOGIN_STEP.step2);
-    //   })
-    //   .catch((err) => console.log(err));
+          setLoginStep(LOGIN_STEP.step2);
+          toast.success("Login success");
+          return;
+        }
+        toast.error(ERROR_MESSAGE_VERIFY_USER[responseCode] || "Login failed");
+      })
+      .catch((err) => {
+        toast.error("Login failed");
+        _toggleLoading("loadingBtnSubmit");
+        console.log(err);
+      });
   };
 
   const _sendOTP = () => {
+    _toggleLoading("loadingBtnSubmit", true);
     stkService
       .createOTPApi(usernameRef.current)
       .then((res) => {
+        _toggleLoading("loadingBtnSubmit", false);
         if (_get(res, "data.data.userId")) {
           toast.success("Send OTP success, please check your phone");
           setLoginStep(LOGIN_STEP.step3);
@@ -178,6 +181,7 @@ const STKPage = () => {
       })
       .catch((err) => {
         toast.error("Send OTP failed");
+        _toggleLoading("loadingBtnSubmit", false);
         console.log(err);
       });
   };
@@ -188,20 +192,67 @@ const STKPage = () => {
   };
 
   const _handleConfirmOTP = (otp: string) => {
+    _toggleLoading("loadingBtnSubmit", true);
     stkService
       .verifyOTPApi(usernameRef.current, otp)
       .then((res) => {
-        console.log("confirmOTP", res.data);
+        _toggleLoading("loadingBtnSubmit", false);
         if (_get(res, "data.data.userId")) {
           toast.success("Confirm OTP success");
           setLoginStep(LOGIN_STEP.step4);
+          return;
         }
         toast.error(_get(res, "data.data.resultMessage", "Invalid OTP"));
       })
       .catch((err) => {
         toast.error("Send OTP failed");
+        _toggleLoading("loadingBtnSubmit", false);
         console.log(err);
       });
+  };
+
+  const _handleVerifyWithToken = async () => {
+    const resp = await getPublicKey();
+    const publicKey = _get(resp, "data.data.key");
+    const formData = {
+      username: usernameRef.current,
+      password: passwordRef.current,
+    };
+    _toggleLoading("loadingBtnSubmit", true);
+    stkService
+      .verifyWithTokenSBH(formData, accountRef.current as string, publicKey)
+      .then((res) => {
+        const code = _get(res, "data.data.code");
+        _toggleLoading("loadingBtnSubmit", false);
+        if (!code) {
+          const errorCode = _get(res, "data.response.responseCode");
+          toast.error(ERROR_MESSAGE_VERIFY_USER[errorCode] || "Login failed");
+          return;
+        }
+        // Redirect to redirect uri
+        router.push({
+          pathname: query.redirect_uri as string,
+          query: {
+            code,
+          },
+        });
+      })
+      .catch((err) => {
+        toast.error("Verify failed");
+        _toggleLoading("loadingBtnSubmit", false);
+        console.log(err);
+      });
+  };
+
+  function _toggleLoading(field: string, isLoading?: boolean) {
+    setLoading({
+      ...loading,
+      [field]: isLoading ? true : false,
+    });
+  }
+
+  const stkContextValue = {
+    loadingBtnSubmit: loading.loadingBtnSubmit,
   };
 
   return (
@@ -226,13 +277,17 @@ const STKPage = () => {
       {isMobile && (
         <>
           <Grid item xs={12}>
-            <SectionMobile1
-              listAccount={listAccount}
-              step={loginStep}
-              onChooseAccount={_handleChooseAccount}
-              onSubmit={_handleSubmitForm}
-              onConfirmOTP={_handleConfirmOTP}
-            />
+            <STKContext.Provider value={stkContextValue}>
+              <SectionMobile1
+                listAccount={listAccount}
+                step={loginStep}
+                onSubmit={_handleSubmitForm}
+                onChooseAccount={_handleChooseAccount}
+                onConfirmOTP={_handleConfirmOTP}
+                onVerifyWithToken={_handleVerifyWithToken}
+                onSendOTP={_sendOTP}
+              />
+            </STKContext.Provider>
           </Grid>
           <Grid item xs={12}>
             <div className={classes.rootMobileUtility}>
@@ -250,14 +305,17 @@ const STKPage = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <SectionLogin
-              listAccount={listAccount}
-              step={loginStep}
-              onSubmit={_handleSubmitForm}
-              onChooseAccount={_handleChooseAccount}
-              onConfirmOTP={_handleConfirmOTP}
-              onSendOTP={_sendOTP}
-            />
+            <STKContext.Provider value={stkContextValue}>
+              <SectionLogin
+                listAccount={listAccount}
+                step={loginStep}
+                onSubmit={_handleSubmitForm}
+                onChooseAccount={_handleChooseAccount}
+                onConfirmOTP={_handleConfirmOTP}
+                onVerifyWithToken={_handleVerifyWithToken}
+                onSendOTP={_sendOTP}
+              />
+            </STKContext.Provider>
           </Grid>
 
           <Grid item xs={12}>
@@ -270,4 +328,4 @@ const STKPage = () => {
   );
 };
 
-export default STKPage;
+export default SBHPage;

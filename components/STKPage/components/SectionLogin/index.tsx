@@ -9,7 +9,7 @@ import {
   LoginSuccessForm,
   ConfirmOTP,
 } from "components/STKPage";
-import { LOGIN_STEP } from "pages/stk";
+import { LOGIN_STEP } from "pages/sbh";
 createTheme();
 const useStyles = makeStyles(() => ({
   root: {
@@ -34,6 +34,7 @@ interface Props {
     data: { username: string; password: string }
   ) => void;
   onChooseAccount: (value: string | number) => void;
+  onVerifyWithToken: () => void;
   onConfirmOTP: (otp: string) => void;
   onSendOTP?: () => void;
   step: string;
@@ -41,7 +42,14 @@ interface Props {
 }
 
 const SectionLogin = (props: Props) => {
-  const { onSubmit, step, onConfirmOTP, onChooseAccount, ...rest } = props;
+  const {
+    onVerifyWithToken,
+    onSubmit,
+    step,
+    onConfirmOTP,
+    onChooseAccount,
+    ...rest
+  } = props;
   const classes = useStyles();
 
   const _handleSubmit = (data: { username: string; password: string }) => {
@@ -67,7 +75,9 @@ const SectionLogin = (props: Props) => {
               {step === LOGIN_STEP.step3 && (
                 <ConfirmOTP onSubmit={onConfirmOTP} {...rest} />
               )}
-              {step === LOGIN_STEP.step4 && <LoginSuccessForm />}
+              {step === LOGIN_STEP.step4 && (
+                <LoginSuccessForm onSubmit={onVerifyWithToken} />
+              )}
             </Grid>
           </Grid>
         </Grid>

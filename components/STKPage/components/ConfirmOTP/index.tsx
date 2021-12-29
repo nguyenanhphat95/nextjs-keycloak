@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useContext,
+} from "react";
 import { useRouter } from "next/router";
 
 import { Grid, Box } from "@mui/material";
@@ -11,6 +17,7 @@ import resources from "pages/assets/translate.json";
 
 import cn from "classnames";
 import _get from "lodash/get";
+import STKContext from "components/STKPage/contexts/STKContextValue";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -62,9 +69,10 @@ const ConfirmOTP = (props: Props) => {
 
   const { locale } = useRouter();
   const t = _get(resources, [locale || LANGUAGE.VI, "confirmOTP"]);
+  const { loadingBtnSubmit } = useContext(STKContext);
 
   const onCallTimer = useCallback(async () => {
-    const isDone = await startTimer(10, timerRef.current);
+    const isDone = await startTimer(119, timerRef.current);
     isDone && setIsResendValid(true);
   }, []);
 
@@ -123,8 +131,9 @@ const ConfirmOTP = (props: Props) => {
             variant="contained"
             fullWidth
             color="secondary"
-            disabled={otp.length < 5}
+            disabled={otp.length < 6}
             onClick={() => onSubmit(otp)}
+            loading={loadingBtnSubmit}
           >
             {t.btnSubmit}
           </ButtonCustom>

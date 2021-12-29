@@ -3,9 +3,9 @@ import Button, { ButtonProps } from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
 import cn from "classnames";
 import { Theme } from "@mui/material/styles";
-
+import LoadingIcon from "../LoadingIcon";
 export interface Props extends ButtonProps {
-  isLoading?: boolean;
+  loading?: boolean;
   className?: string;
 }
 
@@ -17,16 +17,32 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: "inherit",
     fontSize: theme.typography.button.fontSize,
   },
+  btnLoading: {
+    background: "red",
+  },
 }));
 
 const ButtonCustom = (props: Props) => {
-  const { isLoading, className, children, ...rest } = props;
+  const { loading, className, children, ...rest } = props;
   const classes = useStyles();
 
   return (
-    <Button className={cn(classes.root, className)} {...rest}>
-      {children}
-    </Button>
+    <>
+      {loading ? (
+        <Button
+          variant="contained"
+          fullWidth
+          className={cn(classes.root, className)}
+          disabled
+        >
+          <LoadingIcon />
+        </Button>
+      ) : (
+        <Button className={cn(classes.root, className)} {...rest}>
+          {children}
+        </Button>
+      )}
+    </>
   );
 };
 

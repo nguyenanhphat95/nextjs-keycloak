@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -13,7 +13,7 @@ import resources from "pages/assets/translate.json";
 import notificationIcon from "public/images/Notification.png";
 import { ButtonCustom } from "components/commons";
 import _get from "lodash/get";
-
+import STKContext from "components/STKPage/contexts/STKContextValue";
 createTheme();
 const useStyles = makeStyles(() => ({
   root: {
@@ -36,11 +36,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LoginSuccessForm = () => {
+interface Props {
+  onSubmit: () => void;
+}
+
+const LoginSuccessForm = (props: Props) => {
   const classes = useStyles();
+  const { onSubmit } = props;
 
   const { locale } = useRouter();
   const t = _get(resources, [locale || LANGUAGE.VI, "loginSuccessForm"]);
+  const { loadingBtnSubmit } = useContext(STKContext);
 
   return (
     <Box py={3} px={2} className={classes.root}>
@@ -66,9 +72,11 @@ const LoginSuccessForm = () => {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <ButtonCustom
+              onClick={onSubmit}
               className={classes.btnContinue}
               variant="outlined"
               fullWidth
+              loading={loadingBtnSubmit}
             >
               {t.btnContinue}
             </ButtonCustom>
