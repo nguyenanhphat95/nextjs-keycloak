@@ -7,6 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import ThemeProvider from "../providers/ThemeProvider";
 import QueryClientProvider from "../providers/QueryClientProvider";
 import "./../styles/globals.css";
+import axios from "axios";
 const clientSideEmotionCache = createEmotionCache();
 
 type NextPageWithLayout = NextPage & {
@@ -24,6 +25,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     if (jssStyles) {
       jssStyles?.parentElement?.removeChild(jssStyles);
     }
+    axios.get("/api/app");
   }, []);
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page);
