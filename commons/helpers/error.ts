@@ -10,6 +10,8 @@ export const ERROR_CODE = {
   FormatMessageInvalid: "05",
   PasswordExpired: "06",
   SystemError: "99",
+
+  VerifyClientFailed: '100'
 };
 
 export function handleErrorWithResponse(
@@ -23,7 +25,7 @@ export function handleErrorWithResponse(
   router.push({
     pathname: "/error",
     query: {
-      code: resp.response.responseCode,
+      code: ERROR_CODE.VerifyClientFailed,
     },
   });
 }

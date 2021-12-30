@@ -31,7 +31,7 @@ import {
   handleErrorWithResponse,
 } from "commons/helpers";
 import { CLIENT_SECRET } from "commons/constants";
-
+import { ERROR_MESSAGE_VERIFY_USER } from './sbh';
 import desktopPic from "public/images/desktop.png";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -50,17 +50,6 @@ const useStyles = makeStyles(() => ({
     margin: "50px 40px",
   },
 }));
-
-const ERROR_MESSAGE_VERIFY_USER = {
-  [ERROR_CODE.Unauthorized]: "Username or password incorrect",
-  [ERROR_CODE.SessionExpired]: "Session Expired",
-  [ERROR_CODE.UserNotExist]: "User Not Exist",
-  [ERROR_CODE.SessionIdNotFound]: "Session Id Not Found",
-  [ERROR_CODE.FormatMessageInvalid]: "Format Message Invalid",
-  [ERROR_CODE.SystemError]: "System Error",
-  [ERROR_CODE.PasswordExpired]:
-    "Expired password requires accessing ebank.hdbank.com.vn to change password",
-};
 
 const AuthPage = () => {
   const classes = useStyles();

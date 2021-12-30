@@ -8,6 +8,7 @@ B3: yarn dev hoặc npm run dev
 
 - App will listen at http://localhost:3000/
 - URL example to run app: http://localhost:3000/auth?response_type=code&client_id=minhnq9&scope=openid&redirect_uri=http://127.0.0.1
+- URL example to run sbh app: http://localhost:3000/sbh?response_type=code&client_id=minhnq9&scope=openid&redirect_uri=http://127.0.0.1
 
 ## Deploy application
 

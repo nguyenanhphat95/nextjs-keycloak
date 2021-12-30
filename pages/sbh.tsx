@@ -19,13 +19,7 @@ import {
 import { SectionLogin } from "components/STKPage";
 import SectionMobile1 from "components/STKPage/components/mobile/Section1";
 
-import {
-  verifyClientApi,
-  VerifyClientBody,
-  VerifyBody,
-  verifyApi,
-  getPublicKey,
-} from "services";
+import { verifyClientApi, VerifyClientBody, getPublicKey } from "services";
 import * as stkService from "services/stkService";
 
 import { AccountItem } from "interfaces/IListAccount";
@@ -56,7 +50,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ERROR_MESSAGE_VERIFY_USER = {
+export const ERROR_MESSAGE_VERIFY_USER = {
   [ERROR_CODE.Unauthorized]: "Username or password incorrect",
   [ERROR_CODE.SessionExpired]: "Session Expired",
   [ERROR_CODE.UserNotExist]: "User Not Exist",
@@ -65,6 +59,7 @@ const ERROR_MESSAGE_VERIFY_USER = {
   [ERROR_CODE.SystemError]: "System Error",
   [ERROR_CODE.PasswordExpired]:
     "Expired password requires accessing ebank.hdbank.com.vn to change password",
+  [ERROR_CODE.VerifyClientFailed]: "Verify client failed",
 };
 
 export const LOGIN_STEP = {
@@ -92,43 +87,44 @@ const SBHPage = () => {
   const usernameRef = useRef<string>("");
   const passwordRef = useRef<string>("");
 
-  // const _checkHaveParam = useCallback((query: ParsedUrlQuery) => {
-  //   if (
-  //     !query.client_id ||
-  //     !query.redirect_uri ||
-  //     !query.response_type ||
-  //     !query.scope
-  //   ) {
-  //     return false;
-  //   }
-  //   return true;
-  // }, []);
+  const _checkHaveParam = useCallback((query: ParsedUrlQuery) => {
+    if (
+      !query.client_id ||
+      !query.redirect_uri ||
+      !query.response_type ||
+      !query.scope
+    ) {
+      return false;
+    }
+    return true;
+  }, []);
 
-  // useEffect(() => {
-  //   if (!_checkHaveParam(query)) {
-  //     return;
-  //   }
+  useEffect(() => {
+    if (!_checkHaveParam(query)) {
+      return;
+    }
 
-  //   const body: VerifyClientBody = {
-  //     ...generateRequestBody(),
-  //     data: {
-  //       clientId: query.client_id as string,
-  //       clientSecret: CLIENT_SECRET as string,
-  //       redirectUri: query.redirect_uri as string,
-  //     },
-  //   };
-  //   verifyClientApi(body)
-  //     .then((resp) => {
-  //       handleErrorWithResponse(router, resp.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [query, _checkHaveParam, router]);
+    const body: VerifyClientBody = {
+      ...generateRequestBody(),
+      data: {
+        clientId: query.client_id as string,
+        clientSecret: CLIENT_SECRET as string,
+        redirectUri: query.redirect_uri as string,
+      },
+    };
 
-  // if (!_checkHaveParam(query)) {
-  //   return <div>Invalid params</div>;
-  // }
+    verifyClientApi(body)
+      .then((resp) => {
+        handleErrorWithResponse(router, resp.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [query, _checkHaveParam, router]);
+
+  if (!_checkHaveParam(query)) {
+    return <div>Invalid params</div>;
+  }
 
   const _handleSubmitForm = async (
     _: any,
