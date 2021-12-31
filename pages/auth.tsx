@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -29,6 +29,7 @@ import { generateRequestBody, handleErrorWithResponse } from "commons/helpers";
 // import { CLIENT_SECRET } from "commons/constants";
 import { ERROR_MESSAGE_VERIFY_USER } from "./sbh";
 import desktopPic from "public/images/desktop.png";
+import STKContext from "components/STKPage/contexts/STKContextValue";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -54,6 +55,9 @@ const AuthPage = () => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [loading, setLoading] = useState({
+    loadingBtnSubmit: false,
+  });
 
   const _checkHaveParam = useCallback((query: ParsedUrlQuery) => {
     if (
@@ -105,6 +109,7 @@ const AuthPage = () => {
       return;
     }
 
+    _toggleLoading("loadingBtnSubmit", true);
     const crypt = new JSEnscript();
     crypt.setPublicKey(publicKey);
     const credential = crypt.encrypt(JSON.stringify(data));
@@ -120,6 +125,7 @@ const AuthPage = () => {
     verifyApi(body)
       .then((res) => {
         const code = _get(res, "data.data.code");
+        _toggleLoading("loadingBtnSubmit", false);
         if (!code) {
           const errorCode = _get(res, "data.response.responseCode");
           toast.error(ERROR_MESSAGE_VERIFY_USER[errorCode] || "Login failed");
@@ -133,7 +139,21 @@ const AuthPage = () => {
           },
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        _toggleLoading("loadingBtnSubmit", false);
+        console.log(err);
+      });
+  };
+
+  function _toggleLoading(field: string, isLoading?: boolean) {
+    setLoading({
+      ...loading,
+      [field]: isLoading ? true : false,
+    });
+  }
+
+  const stkContextValue = {
+    loadingBtnSubmit: loading.loadingBtnSubmit,
   };
 
   return (
@@ -158,7 +178,9 @@ const AuthPage = () => {
       {isMobile && (
         <>
           <Grid item xs={12}>
-            <SectionMobile1 onSubmit={_handleSubmitForm} />
+            <STKContext.Provider value={stkContextValue}>
+              <SectionMobile1 onSubmit={_handleSubmitForm} />
+            </STKContext.Provider>
           </Grid>
           <Grid item xs={12}>
             <div className={classes.rootMobileUtility}>
@@ -176,7 +198,9 @@ const AuthPage = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <SectionLogin onSubmit={_handleSubmitForm} />
+            <STKContext.Provider value={stkContextValue}>
+              <SectionLogin onSubmit={_handleSubmitForm} />
+            </STKContext.Provider>
           </Grid>
 
           <Grid item xs={12}>
