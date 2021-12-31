@@ -29,7 +29,7 @@ import {
   generateRequestBody,
   handleErrorWithResponse,
 } from "commons/helpers";
-import { CLIENT_SECRET } from "commons/constants";
+// import { CLIENT_SECRET } from "commons/constants";
 
 import desktopPic from "public/images/desktop.png";
 import STKContext from "components/STKPage/contexts/STKContextValue";
@@ -108,7 +108,7 @@ const SBHPage = () => {
       ...generateRequestBody(),
       data: {
         clientId: query.client_id as string,
-        clientSecret: CLIENT_SECRET as string,
+        clientSecret: "",
         redirectUri: query.redirect_uri as string,
       },
     };

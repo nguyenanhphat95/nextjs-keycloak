@@ -11,7 +11,7 @@ module.exports = {
     SIGNATURE_CLIENT: process.env.SIGNATURE,
     PARTNER_ID_CLIENT: process.env.PARTNER_ID,
     GRANT_TYPE_CLIENT: process.env.GRANT_TYPE,
-    CLIENT_SECRET_CLIENT: process.env.CLIENT_SECRET,
+    // CLIENT_SECRET_CLIENT: process.env.CLIENT_SECRET,
     // Config for SBH
     CHANNEL_CLIENT: process.env.CHANNEL,
     SERVICE_CODE_CLIENT: process.env.SERVICE_CODE,

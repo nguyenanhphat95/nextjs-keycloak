@@ -17,7 +17,10 @@ export default async function handler(
   try {
     const resp: AxiosResponse<VerifyUserResponse> = await axiosWrapper.post(
       url,
-      req.body
+      {
+        ...req.body,
+        clientSecret: process.env.CLIENT_SECRET,
+      }
     );
     res.status(200).json(resp.data);
   } catch (e) {

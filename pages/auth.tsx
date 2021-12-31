@@ -25,13 +25,9 @@ import {
   verifyApi,
   getPublicKey,
 } from "services";
-import {
-  ERROR_CODE,
-  generateRequestBody,
-  handleErrorWithResponse,
-} from "commons/helpers";
-import { CLIENT_SECRET } from "commons/constants";
-import { ERROR_MESSAGE_VERIFY_USER } from './sbh';
+import { generateRequestBody, handleErrorWithResponse } from "commons/helpers";
+// import { CLIENT_SECRET } from "commons/constants";
+import { ERROR_MESSAGE_VERIFY_USER } from "./sbh";
 import desktopPic from "public/images/desktop.png";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -80,7 +76,7 @@ const AuthPage = () => {
       ...generateRequestBody(),
       data: {
         clientId: query.client_id as string,
-        clientSecret: CLIENT_SECRET as string,
+        clientSecret: "",
         redirectUri: query.redirect_uri as string,
       },
     };
