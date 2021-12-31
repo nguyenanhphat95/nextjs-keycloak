@@ -112,7 +112,6 @@ const SBHPage = () => {
         redirectUri: query.redirect_uri as string,
       },
     };
-
     verifyClientApi(body)
       .then((resp) => {
         handleErrorWithResponse(router, resp.data);

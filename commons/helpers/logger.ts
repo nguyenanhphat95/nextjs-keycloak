@@ -1,3 +1,4 @@
+import { ENABLE_WRITE_LOG } from "commons/constants";
 import { configure, getLogger } from "log4js";
 
 configure({
@@ -23,6 +24,16 @@ configure({
 
 const logger = getLogger();
 
-export const writeLog = (folder: string, date: Date, content: string) => {
-  logger.info(`${folder} - ${date}----content: ${content}`);
+export const writeLog = (
+  path: string,
+  date: Date,
+  content: string,
+  bodyData?: string
+) => {
+  if (ENABLE_WRITE_LOG) {
+    return;
+  }
+  logger.info(
+    `${path} - ${date}----content: ${content}---withBodyData: ${bodyData || ""}`
+  );
 };

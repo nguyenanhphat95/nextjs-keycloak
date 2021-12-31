@@ -7,21 +7,32 @@ import {
   CLIENT_ID_SBH,
   CLIENT_SECRET_SBH,
 } from "commons/constants";
+import { writeLog } from "commons/helpers/logger";
+import ip from "ip";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<VerifyOTPResponse>
 ) {
-  const url = `${API_DOMAIN_SBH_SANDBOX}/oauthservice/verifyOtp`;
-  const resp: AxiosResponse<VerifyOTPResponse> = await axiosWrapper.post(
-    url,
-    req.body,
-    {
-      headers: {
-        "X-IBM-Client-Id": CLIENT_ID_SBH,
-        "X-IBM-CLIENT-SECRET": CLIENT_SECRET_SBH,
-      },
-    }
-  );
-  res.status(200).json(resp.data);
+  try {
+    const url = `${API_DOMAIN_SBH_SANDBOX}/oauthservice/verifyOtp`;
+    const resp: AxiosResponse<VerifyOTPResponse> = await axiosWrapper.post(
+      url,
+      req.body,
+      {
+        headers: {
+          "X-IBM-Client-Id": CLIENT_ID_SBH,
+          "X-IBM-CLIENT-SECRET": CLIENT_SECRET_SBH,
+        },
+      }
+    );
+    res.status(200).json(resp.data);
+  } catch (err) {
+    writeLog(
+      ip.address(),
+      new Date(),
+      "Failed when call api verify OTP",
+      JSON.stringify(req.body)
+    );
+  }
 }

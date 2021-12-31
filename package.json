@@ -16,6 +16,7 @@
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
     "install": "^0.13.0",
+    "ip": "^1.1.5",
     "lodash": "^4.17.21",
     "log4js": "^6.3.0",
     "next": "12.0.4",
@@ -28,6 +29,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/ip": "^1.1.0",
     "@types/node": "16.11.11",
     "@types/react": "17.0.37",
     "@types/uuid": "^8.3.3",
