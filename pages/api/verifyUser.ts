@@ -12,9 +12,9 @@ export default async function handler(
   res: NextApiResponse<VerifyUserResponse>
 ) {
   const url = `${API_DOMAIN}/oauth2/api/verify_client`;
-  const resp: AxiosResponse<VerifyUserResponse> = await axiosWrapper.post(
-    url,
-    req.body
-  );
+  const resp: AxiosResponse<VerifyUserResponse> = await axiosWrapper.post(url, {
+    ...req.body,
+    clientSecret: process.env.CLIENT_SECRET,
+  });
   res.status(200).json(resp.data);
 }
