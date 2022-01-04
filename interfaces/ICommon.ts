@@ -6,3 +6,8 @@ export interface ResponseData {
     responseTime: string;
   };
 }
+
+export interface LogData {
+  content: string;
+  body?: Record<string, string>;
+}

@@ -5,7 +5,7 @@ import { API_DOMAIN } from "commons/constants";
 import { VerifyWithTokenSBHResponse } from "interfaces/IVerifyWithTokenSBH";
 import { writeLog } from "commons/helpers/logger";
 import ip from "ip";
-
+import _get from "lodash/get";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<VerifyWithTokenSBHResponse>
@@ -19,7 +19,7 @@ export default async function handler(
     writeLog(
       ip.address(),
       new Date(),
-      "Failed when call api verify with token SBH",
+      `Verify With Token SBH api: ${_get(err, "message")}`,
       JSON.stringify(req.body)
     );
   }

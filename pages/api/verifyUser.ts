@@ -6,7 +6,7 @@ import { API_DOMAIN } from "commons/constants";
 import { ResponseData } from "interfaces/ICommon";
 import { writeLog } from "commons/helpers/logger";
 import ip from "ip";
-
+import _get from "lodash/get";
 export interface VerifyUserResponse extends ResponseData {}
 
 export default async function handler(
@@ -27,7 +27,7 @@ export default async function handler(
     writeLog(
       ip.address(),
       new Date(),
-      "Failed when call api verify user",
+      `Verify user api: ${_get(e, "message")}`,
       JSON.stringify(req.body)
     );
   }

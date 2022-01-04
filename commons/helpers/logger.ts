@@ -30,7 +30,7 @@ export const writeLog = (
   content: string,
   bodyData?: string
 ) => {
-  if (ENABLE_WRITE_LOG) {
+  if (!ENABLE_WRITE_LOG) {
     return;
   }
   logger.info(

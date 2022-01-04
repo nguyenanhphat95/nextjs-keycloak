@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
+import axiosWrapper from "commons/helpers/axios/axios-instance";
 import { VerifyUserResponse } from "pages/api/verifyUser";
 
 export interface VerifyClientBody {
@@ -16,7 +17,7 @@ export interface VerifyClientBody {
 }
 
 export const verifyClientApi = async (body: VerifyClientBody) => {
-  const resp: AxiosResponse<VerifyUserResponse> = await axios.post(
+  const resp: AxiosResponse<VerifyUserResponse> = await axiosWrapper.post(
     "/api/verifyUser",
     body
   );

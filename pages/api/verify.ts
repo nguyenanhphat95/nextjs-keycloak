@@ -4,6 +4,7 @@ import { AxiosResponse } from "axios";
 import { API_DOMAIN } from "commons/constants";
 import { writeLog } from "commons/helpers/logger";
 import ip from "ip";
+import _get from "lodash/get";
 
 export interface VerifyResponse {
   data: {
@@ -25,7 +26,7 @@ export default async function handler(
     writeLog(
       ip.address(),
       new Date(),
-      "Failed when call api verify",
+      `Verify api: ${_get(e, "message")}`,
       JSON.stringify(req.body)
     );
   }

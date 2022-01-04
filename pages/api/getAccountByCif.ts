@@ -9,7 +9,7 @@ import {
 } from "commons/constants";
 import { writeLog } from "commons/helpers/logger";
 import ip from "ip";
-
+import _get from "lodash/get";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ListAccountResponse>
@@ -31,7 +31,7 @@ export default async function handler(
     writeLog(
       ip.address(),
       new Date(),
-      "Failed when call api get list account bank",
+      `Get list account api: ${_get(err, "message")}`,
       JSON.stringify(req.body)
     );
   }

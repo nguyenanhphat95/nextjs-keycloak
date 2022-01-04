@@ -89,7 +89,7 @@ const AuthPage = () => {
         handleErrorWithResponse(router, resp.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       });
   }, [query, _checkHaveParam, router]);
 

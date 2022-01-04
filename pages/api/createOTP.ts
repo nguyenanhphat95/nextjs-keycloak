@@ -9,6 +9,7 @@ import {
 } from "commons/constants";
 import { writeLog } from "commons/helpers/logger";
 import ip from "ip";
+import _get from "lodash/get";
 
 export default async function handler(
   req: NextApiRequest,
@@ -28,6 +29,6 @@ export default async function handler(
     );
     res.status(200).json(resp.data);
   } catch (e) {
-    writeLog(ip.address(), new Date(), "Failed when call api createOtp");
+    writeLog(ip.address(), new Date(), `createOtp: ${_get(e, "message")}`);
   }
 }

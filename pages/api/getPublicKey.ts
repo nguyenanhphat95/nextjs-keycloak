@@ -5,6 +5,7 @@ import { API_DOMAIN } from "commons/constants";
 import { PublicKeyResponse } from "interfaces/IPublicKey";
 import { writeLog } from "commons/helpers/logger";
 import ip from "ip";
+import _get from "lodash/get";
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,6 +16,10 @@ export default async function handler(
     const resp: AxiosResponse<PublicKeyResponse> = await axiosWrapper.get(url);
     res.status(200).json(resp.data);
   } catch (err) {
-    writeLog(ip.address(), new Date(), "Failed when call api get public key");
+    writeLog(
+      ip.address(),
+      new Date(),
+      `Get public key api: ${_get(err, "message")}`
+    );
   }
 }
