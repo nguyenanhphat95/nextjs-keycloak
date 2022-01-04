@@ -20,8 +20,15 @@ const ToggleItem = (props: Props) => {
     if (!isMobile) {
       return;
     }
-
     setShow((prev) => !prev);
+  };
+
+  const renderOption = (options: string[]) => {
+    return (options || []).map((option, i) => (
+      <Grid key={i} item>
+        {resources[option]}
+      </Grid>
+    ));
   };
   return (
     <Grid item xs={12} md={3}>
@@ -45,14 +52,10 @@ const ToggleItem = (props: Props) => {
             )}
           </Grid>
         </Grid>
-        {(!isMobile || !show) && (
-          <>
-            {(col.options || []).map((option, i) => (
-              <Grid key={i} item>
-                {resources[option]}
-              </Grid>
-            ))}
-          </>
+        {isMobile ? (
+          <>{show && renderOption(col.options)}</>
+        ) : (
+          renderOption(col.options)
         )}
       </Grid>
     </Grid>
