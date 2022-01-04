@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: "58px !important",
     textTransform: "inherit",
     fontSize: theme.typography.button.fontSize,
+    paddingLeft: "30px !important",
+    paddingRight: "30px !important",
   },
   btnLoading: {
     background: "red",
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ButtonCustom = (props: Props) => {
-  const { loading, className, children, ...rest } = props;
+  const { fullWidth, loading, className, children, ...rest } = props;
   const classes = useStyles();
 
   return (
@@ -31,14 +33,18 @@ const ButtonCustom = (props: Props) => {
       {loading ? (
         <Button
           variant="contained"
-          fullWidth
+          fullWidth={fullWidth}
           className={cn(classes.root, className)}
           disabled
         >
           <LoadingIcon />
         </Button>
       ) : (
-        <Button className={cn(classes.root, className)} {...rest}>
+        <Button
+          fullWidth={fullWidth}
+          className={cn(classes.root, className)}
+          {...rest}
+        >
           {children}
         </Button>
       )}

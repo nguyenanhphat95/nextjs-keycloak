@@ -6,14 +6,12 @@ import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import { Grid, Box } from "@mui/material";
 
-import { LoginForm } from "components/LoginPage";
 import {
   ChooseAccountForm,
   LoginSuccessForm,
   ConfirmOTP,
+  LoginForm,
 } from "components/STKPage";
-import { LIST_NOTIFICATION } from "components/LoginPage/SectionNotification";
-
 import { LOGIN_STEP } from "pages/sbh";
 
 import resources from "pages/assets/translate.json";
@@ -25,8 +23,14 @@ import _slice from "lodash/slice";
 createTheme();
 const useStyles = makeStyles(() => ({
   root: {
-    background: "linear-gradient(167.6deg, #FFAC41 7.65%, #DA3A20 89.4%)",
     padding: 16,
+    position: "relative",
+  },
+  box: {
+    marginTop: "-80px",
+    borderRadius: 20,
+    background: "#FFFFFF",
+    boxShadow: "0px 14px 40px rgba(33, 43, 54, 0.1)",
   },
   title: {
     color: "white",
@@ -86,43 +90,24 @@ const SectionMobile1 = (props: Props) => {
 
   return (
     <div className={classes.root}>
-      <Grid container direction="column" spacing={2}>
-        <Grid item>
-          {step === LOGIN_STEP.step1 && <LoginForm onSubmit={_handleSubmit} />}
-          {step === LOGIN_STEP.step2 && (
-            <ChooseAccountForm onSubmit={onChooseAccount} {...rest} />
-          )}
-          {step === LOGIN_STEP.step3 && (
-            <ConfirmOTP onSubmit={onConfirmOTP} {...rest} />
-          )}
-          {step === LOGIN_STEP.step4 && (
-            <LoginSuccessForm onSubmit={onVerifyWithToken} />
-          )}
-        </Grid>
-
-        <Grid item>
-          <Box mb={1} className={classes.title}>
-            {t.title}
-          </Box>
-          <Grid container spacing={1}>
-            {_slice(LIST_NOTIFICATION, 0, 2).map((item, index) => (
-              <Grid key={index} item xs={6}>
-                <Box className={classes.notifyItem}>
-                  <Box className={classes.wrapperImage}>
-                    <Image src={item.image} alt="icon-image" />
-                  </Box>
-                  <Box p={2}>
-                    <div className={classes.nameNotify}>{t[item.title]}</div>
-                    <div className={classes.contentNotify}>
-                      {t[item.shortContent]}
-                    </div>
-                  </Box>
-                </Box>
-              </Grid>
-            ))}
+      <div className={classes.box}>
+        <Grid container direction="column">
+          <Grid item>
+            {step === LOGIN_STEP.step1 && (
+              <LoginForm onSubmit={_handleSubmit} />
+            )}
+            {step === LOGIN_STEP.step2 && (
+              <ChooseAccountForm onSubmit={onChooseAccount} {...rest} />
+            )}
+            {step === LOGIN_STEP.step3 && (
+              <ConfirmOTP onSubmit={onConfirmOTP} {...rest} />
+            )}
+            {step === LOGIN_STEP.step4 && (
+              <LoginSuccessForm onSubmit={onVerifyWithToken} />
+            )}
           </Grid>
         </Grid>
-      </Grid>
+      </div>
     </div>
   );
 };

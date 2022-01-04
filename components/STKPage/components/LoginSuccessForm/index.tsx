@@ -10,7 +10,7 @@ import { createTheme } from "@mui/material/styles";
 import { LANGUAGE } from "commons/constants";
 import resources from "pages/assets/translate.json";
 
-import notificationIcon from "public/images/Notification.png";
+import tickSquareIcon from "public/images/TickSquare.png";
 import { ButtonCustom } from "components/commons";
 import _get from "lodash/get";
 import STKContext from "components/STKPage/contexts/STKContextValue";
@@ -21,17 +21,20 @@ const useStyles = makeStyles(() => ({
     borderRadius: 20,
   },
   title: {
-    fontSize: 30,
+    fontSize: 22,
     fontWeight: 500,
     textAlign: "center",
   },
-  btnContinue: {
+  btnDownload: {
     borderColor: "#333333 !important",
     color: "#333333 !important",
   },
   textInstruction: {
-    color: "#1890FF",
-    fontWeight: 500,
+    textDecoration: "underline",
+    fontWeight: 400,
+    textAlign: "center",
+  },
+  textCenter: {
     textAlign: "center",
   },
 }));
@@ -53,38 +56,40 @@ const LoginSuccessForm = (props: Props) => {
       <Grid container direction="column" spacing={3}>
         <Grid item>
           <Box display="flex" justifyContent="center">
-            <Image src={notificationIcon} alt="notification" />
+            <Image src={tickSquareIcon} alt="tick square" />
           </Box>
         </Grid>
         <Grid item>
-          <Box className={classes.title} display="flex" justifyContent="center">
-            {t.title}
-          </Box>
+          <Box className={classes.title}>{t.title}</Box>
         </Grid>
         <Grid item>
-          <Box display="flex" justifyContent="center">
-            {t.content}
-          </Box>
+          <Box className={classes.textCenter}>{t.subtitle1}</Box>
+        </Grid>
+        <Grid item>
+          <Box className={classes.textCenter}>{t.subtitle2}</Box>
         </Grid>
       </Grid>
 
       <Box mt={4}>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <ButtonCustom
-              onClick={onSubmit}
-              className={classes.btnContinue}
-              variant="outlined"
-              fullWidth
-              loading={loadingBtnSubmit}
-            >
-              {t.btnContinue}
-            </ButtonCustom>
+          <Grid item md={6} xs={12}>
+            <Box display="flex" justifyContent="center">
+              <ButtonCustom
+                onClick={onSubmit}
+                color="secondary"
+                variant="contained"
+                loading={loadingBtnSubmit}
+              >
+                {t.btnContinue}
+              </ButtonCustom>
+            </Box>
           </Grid>
-          <Grid item xs={6}>
-            <ButtonCustom color="secondary" variant="contained" fullWidth>
-              {t.btnDownApp}
-            </ButtonCustom>
+          <Grid item md={6} xs={12}>
+            <Box display="flex" justifyContent="center">
+              <ButtonCustom variant="outlined" className={classes.btnDownload}>
+                {t.btnDownApp}
+              </ButtonCustom>
+            </Box>
           </Grid>
         </Grid>
 

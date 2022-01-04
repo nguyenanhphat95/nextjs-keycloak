@@ -6,11 +6,13 @@ import React, {
   useRef,
 } from "react";
 import { makeStyles } from "@mui/styles";
+import { Theme } from "@mui/material/styles";
+
 import { Grid } from "@mui/material";
 import { isNumber } from "commons/helpers";
 import _get from "lodash/get";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   otpInput: {
     width: "3rem",
@@ -19,6 +21,10 @@ const useStyles = makeStyles(() => ({
     textAlign: "center",
     borderRadius: "4px",
     border: "1px solid rgba(0, 0, 0, 0.3)",
+    [theme.breakpoints.down("sm")]: {
+      width: "2.5rem",
+      height: "2.5rem",
+    },
   },
 }));
 

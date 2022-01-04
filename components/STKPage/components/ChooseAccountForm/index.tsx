@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useContext } from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { Grid, Box } from "@mui/material";
@@ -9,8 +8,6 @@ import { ButtonCustom, SelectCustom } from "components/commons";
 
 import { LANGUAGE } from "commons/constants";
 import resources from "pages/assets/translate.json";
-
-import notificationIcon from "public/images/Notification.png";
 
 import _get from "lodash/get";
 import { AccountItem } from "interfaces/IListAccount";
@@ -27,6 +24,12 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontSize: 20,
+    fontWeight: 500,
+  },
+  textCenter: {
+    textAlign: "center",
+  },
+  labelAccount: {
     fontWeight: 500,
   },
 }));
@@ -157,24 +160,15 @@ const ChooseAccountForm = (props: Props) => {
     <Box py={3} px={2} className={classes.root}>
       <Grid container direction="column" spacing={3}>
         <Grid item>
-          <Box display="flex" justifyContent="center">
-            <Image src={notificationIcon} alt="notification" />
-          </Box>
-        </Grid>
-        <Grid item>
           <Box className={classes.title} display="flex" justifyContent="center">
             {t.title}
           </Box>
         </Grid>
         <Grid item>
-          <Box display="flex" justifyContent="center">
-            {t.content}
-          </Box>
+          <Box className={classes.textCenter}>{t.content}</Box>
         </Grid>
         <Grid item>
-          <Box display="flex" justifyContent="center">
-            {t.labelAccount}
-          </Box>
+          <Box className={classes.labelAccount}>{t.labelAccount}</Box>
         </Grid>
 
         <Grid item>
@@ -190,10 +184,9 @@ const ChooseAccountForm = (props: Props) => {
         </Grid>
       </Grid>
 
-      <Box mt={4}>
+      <Box mt={4} className={classes.textCenter}>
         <ButtonCustom
           variant="contained"
-          fullWidth
           color="secondary"
           onClick={() => onSubmit(account)}
           disabled={account ? false : true}

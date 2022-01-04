@@ -3,24 +3,22 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
-import { ParsedUrlQuery } from "querystring";
 import { Grid, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import {
-  SectionHeader,
-  SectionNotification,
-  SectionFooter,
-  UtilityEbank,
-} from "components/LoginPage";
+import { SectionNotification } from "components/LoginPage";
 
-import { SectionLogin } from "components/STKPage";
-import SectionMobile1 from "components/STKPage/components/mobile/Section1";
+import {
+  SectionLogin,
+  SectionMobile1,
+  SectionHeader,
+  SectionFooter,
+} from "components/STKPage";
 
 import { verifyClientApi, VerifyClientBody, getPublicKey } from "services";
 import * as stkService from "services/stkService";
+import { ParsedUrlQuery } from "querystring";
 
 import { AccountItem } from "interfaces/IListAccount";
 
@@ -32,6 +30,7 @@ import {
 // import { CLIENT_SECRET } from "commons/constants";
 
 import desktopPic from "public/images/desktop.png";
+import bannerMobile from "public/images/bannerMobile.png";
 import STKContext from "components/STKPage/contexts/STKContextValue";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -272,6 +271,11 @@ const SBHPage = () => {
       {isMobile && (
         <>
           <Grid item xs={12}>
+            <Box className={classes.banner}>
+              <Image src={bannerMobile} alt="banner-mobile" />
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
             <STKContext.Provider value={stkContextValue}>
               <SectionMobile1
                 listAccount={listAccount}
@@ -283,11 +287,6 @@ const SBHPage = () => {
                 onSendOTP={_sendOTP}
               />
             </STKContext.Provider>
-          </Grid>
-          <Grid item xs={12}>
-            <div className={classes.rootMobileUtility}>
-              <UtilityEbank />
-            </div>
           </Grid>
         </>
       )}

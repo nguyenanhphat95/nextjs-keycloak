@@ -1,7 +1,7 @@
 {
   "vi": {
     "confirmOTP": {
-      "title": "Xác nhận lựa chọn tài khoản thanh toán",
+      "title": "Xác thực ký hợp đồng điện tử",
       "content": "Vui lòng nhập mã xác thực đã được gửi đến số điện thoại của bạn",
       "label": "Nhập mã xác nhận",
       "question": "Quý khách không nhận được tin nhắn?",
@@ -12,25 +12,29 @@
       "title": "Chọn tài khoản thanh toán",
       "content": "Vui lòng chọn Tài khoản thanh toán mà bạn muốn liên kết với Sổ Bán Hàng",
       "labelAccount": "Lựa chọn Số tài khoản thanh toán:",
-      "placeholderAccount": "Vui lòng chọn tài khoản",
+      "placeholderAccount": "Chọn",
       "btnSubmit": "Tiếp tục"
     },
     "loginSuccessForm": {
       "title": "Đăng nhập thành công eBanking",
-      "content": "Chúc mừng bạn đã đăng nhập thành công dịch vụ eBanking HDBank. Vui lòng tiếp tục với SBH để hoàn tất thanh toán.",
-      "btnContinue": "Tiếp tục",
+      "subtitle1": "Chúc mừng bạn đã đăng nhập thành công dịch vụ eBanking HDBank.",
+      "subtitle2": "Vui lòng tiếp tục với SBH để hoàn tất thanh toán.",
+      "btnContinue": "Tiếp tục với SBH",
       "btnDownApp": "Tải app HDBank",
-      "textInstruction": "Hướng dẫn nạp tiền tài khoản thanh toán trực tuyến"
+      "textInstruction": "Hướng dẫn nạp tiền tài khoản thanh toán HDMoney"
     },
     "loginForm": {
       "title": "Đăng nhập eBanking",
+      "subtitle1": "Bạn đã có tài khoản thanh toán HDBank",
+      "subtitle2": "Vui lòng đăng nhập eBanking để chọn tài khoản thanh toán",
       "username": "Tên đăng nhập",
       "password": "Mật khẩu",
       "btnSubmit": "Đăng nhập",
       "cantLogin": "Bạn không thể đăng nhập?",
       "registerAccount": "Tạo tài khoản ngay",
       "personal": "Cá nhân",
-      "enterprise": "Doanh nghiệp"
+      "enterprise": "Doanh nghiệp",
+      "textForgotAccount": "Quên tên đăng nhập/mật khẩu"
     },
     "utilityBank": {
       "title": "Khám phá tiện ích eBanking",
@@ -97,7 +101,7 @@
   },
   "en": {
     "confirmOTP": {
-      "title": "Confirm payment account selection",
+      "title": "Authentication of electronic contract signing",
       "content": "Please enter the verification code sent to your phone number",
       "label": "Enter the confirmation code",
       "question": "You did not receive the message?",
@@ -108,25 +112,29 @@
       "title": "Choose a payment account",
       "content": "Please select the Payment Account you want to link to the Sales Book",
       "labelAccount": "Select Payment Account Number:",
-      "placeholderAccount": "Please select an account",
+      "placeholderAccount": "Select",
       "btnSubmit": "Continue"
     },
     "loginSuccessForm": {
       "title": "Successfully logged in to eBanking",
-      "content": "Congratulations, you have successfully logged into HDBank eBanking service. Please proceed to SBH to complete payment.",
-      "btnContinue": "Continue",
+      "subtitle1": "Congratulations, you have successfully logged into HDBank eBanking service.",
+      "subtitle2": "Please proceed to SBH to complete payment.",
+      "btnContinue": "Continue with SBH",
       "btnDownApp": "Download app",
-      "textInstruction": "Instructions to recharge online payment accounts"
+      "textInstruction": "Instructions to top up HDMoney payment account"
     },
     "loginForm": {
       "title": "Login to eBanking",
+      "subtitle1": "You already have an HDBank payment account",
+      "subtitle2": "Please login to eBanking to choose a payment account",
       "username": "Username",
       "password": "Password",
       "btnSubmit": "Sign in",
       "cantLogin": "You can't login?",
       "registerAccount": "Create an account now",
       "personal": "Personal",
-      "enterprise": "Enterprise"
+      "enterprise": "Enterprise",
+      "textForgotAccount": "Forgot username/password"
     },
     "utilityBank": {
       "title": "Discover the utility of eBanking",

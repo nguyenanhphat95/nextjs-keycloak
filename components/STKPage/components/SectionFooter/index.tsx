@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import { Grid, Box, Divider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { createTheme, Theme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -31,7 +31,7 @@ import _get from "lodash/get";
 import _slice from "lodash/slice";
 
 createTheme();
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   container: {
     background: "#F4F4F4",
   },

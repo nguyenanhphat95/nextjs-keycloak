@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   },
   header: {
     fontWeight: 500,
-    fontSize: 30,
+    fontSize: 22,
     textAlign: "center",
   },
   caption: {
@@ -127,16 +127,17 @@ const ConfirmOTP = (props: Props) => {
         </Grid>
 
         <Grid item>
-          <ButtonCustom
-            variant="contained"
-            fullWidth
-            color="secondary"
-            disabled={otp.length < 6}
-            onClick={() => onSubmit(otp)}
-            loading={loadingBtnSubmit}
-          >
-            {t.btnSubmit}
-          </ButtonCustom>
+          <Box display="flex" justifyContent="center">
+            <ButtonCustom
+              variant="contained"
+              color="secondary"
+              disabled={otp.length < 6}
+              onClick={() => onSubmit(otp)}
+              loading={loadingBtnSubmit}
+            >
+              {t.btnSubmit}
+            </ButtonCustom>
+          </Box>
         </Grid>
       </Grid>
     </Box>
