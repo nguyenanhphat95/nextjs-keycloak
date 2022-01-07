@@ -7,8 +7,6 @@ import { Grid, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import { SectionNotification } from "components/LoginPage";
-
 import {
   SectionLogin,
   SectionMobile1,
@@ -310,10 +308,6 @@ const SBHPage = () => {
                 onSendOTP={_sendOTP}
               />
             </STKContext.Provider>
-          </Grid>
-
-          <Grid item xs={12}>
-            <SectionNotification />
           </Grid>
         </>
       )}

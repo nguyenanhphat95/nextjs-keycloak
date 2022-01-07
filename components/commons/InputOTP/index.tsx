@@ -31,10 +31,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   onFinish?: (otp: string) => void;
   onChange?: (otp: string) => void;
+  label?: string | React.ReactElement;
 }
 
 const InputOTP = (props: Props) => {
-  const { onFinish, onChange } = props;
+  const { onFinish, onChange, label } = props;
 
   const classes = useStyles();
   const otpEl1 = useRef<HTMLInputElement>(null);
@@ -98,88 +99,93 @@ const InputOTP = (props: Props) => {
 
   return (
     <form>
-      <Grid justifyContent="center" container spacing={2}>
-        <Grid item xs="auto">
-          <input
-            ref={otpEl1}
-            name="otp1"
-            type="text"
-            autoComplete="off"
-            className={classes.otpInput}
-            value={otpValue.otp1}
-            onChange={(e) => _handleChange("otp1", e)}
-            tabIndex={1}
-            maxLength={1}
-            onKeyUp={_handleFocus}
-          />
-        </Grid>
-        <Grid item xs="auto">
-          <input
-            name="otp2"
-            type="text"
-            autoComplete="off"
-            className={classes.otpInput}
-            value={otpValue.otp2}
-            onChange={(e) => _handleChange("otp2", e)}
-            tabIndex={2}
-            maxLength={1}
-            onKeyUp={_handleFocus}
-          />
-        </Grid>
+      <Grid container direction="column" spacing={1}>
+        {label && <Grid item>{label}</Grid>}
+        <Grid item>
+          <Grid justifyContent="center" container spacing={2}>
+            <Grid item xs="auto">
+              <input
+                ref={otpEl1}
+                name="otp1"
+                type="text"
+                autoComplete="off"
+                className={classes.otpInput}
+                value={otpValue.otp1}
+                onChange={(e) => _handleChange("otp1", e)}
+                tabIndex={1}
+                maxLength={1}
+                onKeyUp={_handleFocus}
+              />
+            </Grid>
+            <Grid item xs="auto">
+              <input
+                name="otp2"
+                type="text"
+                autoComplete="off"
+                className={classes.otpInput}
+                value={otpValue.otp2}
+                onChange={(e) => _handleChange("otp2", e)}
+                tabIndex={2}
+                maxLength={1}
+                onKeyUp={_handleFocus}
+              />
+            </Grid>
 
-        <Grid item xs="auto">
-          <input
-            name="otp3"
-            type="text"
-            autoComplete="off"
-            className={classes.otpInput}
-            value={otpValue.otp3}
-            onChange={(e) => _handleChange("otp3", e)}
-            tabIndex={3}
-            maxLength={1}
-            onKeyUp={_handleFocus}
-          />
-        </Grid>
+            <Grid item xs="auto">
+              <input
+                name="otp3"
+                type="text"
+                autoComplete="off"
+                className={classes.otpInput}
+                value={otpValue.otp3}
+                onChange={(e) => _handleChange("otp3", e)}
+                tabIndex={3}
+                maxLength={1}
+                onKeyUp={_handleFocus}
+              />
+            </Grid>
 
-        <Grid item xs="auto">
-          <input
-            name="otp4"
-            type="text"
-            autoComplete="off"
-            className={classes.otpInput}
-            value={otpValue.otp4}
-            onChange={(e) => _handleChange("otp4", e)}
-            tabIndex={4}
-            maxLength={1}
-            onKeyUp={_handleFocus}
-          />
-        </Grid>
+            <Grid item xs="auto">
+              <input
+                name="otp4"
+                type="text"
+                autoComplete="off"
+                className={classes.otpInput}
+                value={otpValue.otp4}
+                onChange={(e) => _handleChange("otp4", e)}
+                tabIndex={4}
+                maxLength={1}
+                onKeyUp={_handleFocus}
+              />
+            </Grid>
 
-        <Grid item xs="auto">
-          <input
-            name="otp5"
-            type="text"
-            autoComplete="off"
-            className={classes.otpInput}
-            value={otpValue.otp5}
-            onChange={(e) => _handleChange("otp5", e)}
-            tabIndex={5}
-            maxLength={1}
-            onKeyUp={_handleFocus}
-          />
-        </Grid>
-        <Grid item xs="auto">
-          <input
-            name="otp6"
-            type="text"
-            autoComplete="off"
-            className={classes.otpInput}
-            value={otpValue.otp6}
-            onChange={(e) => _handleChange("otp6", e)}
-            tabIndex={6}
-            maxLength={1}
-            onKeyUp={_handleFocus}
-          />
+            <Grid item xs="auto">
+              <input
+                name="otp5"
+                type="text"
+                autoComplete="off"
+                className={classes.otpInput}
+                value={otpValue.otp5}
+                onChange={(e) => _handleChange("otp5", e)}
+                tabIndex={5}
+                maxLength={1}
+                onKeyUp={_handleFocus}
+              />
+            </Grid>
+            <Grid item xs="auto">
+              <input
+                name="otp6"
+                type="text"
+                autoComplete="off"
+                className={classes.otpInput}
+                value={otpValue.otp6}
+                onChange={(e) => _handleChange("otp6", e)}
+                tabIndex={6}
+                maxLength={1}
+                onKeyUp={_handleFocus}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </form>
