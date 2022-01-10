@@ -3,6 +3,7 @@ import { Grid, Box, Theme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ButtonCustom, CheckboxCustom } from "components/commons";
 import { parseInfoFromEKYC } from "commons/helpers";
+import { FormDataFinal } from "../interfaces";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  data: any;
+  data: FormDataFinal;
 }
 
 const ConfirmInfoPage = (props: Props) => {
@@ -33,18 +34,7 @@ const ConfirmInfoPage = (props: Props) => {
   const _handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsAceptCondition(event.target.checked);
   };
-  // const info = parseInfoFromEKYC(ekycData);
-  const info = {
-    username: "username",
-    gender: "gender",
-    birthday: "birthday",
-    identification: "identification",
-    issue_date: "issue_date",
-    issue_place: "issue_place",
-    recent_location: "recent_location",
-    nationality: "nationality",
-  };
-  console.log("info:", info);
+  const info = parseInfoFromEKYC(data.ekycData);
 
   return (
     <div className={classes.root}>

@@ -38,7 +38,16 @@ const Home = () => {
   const classes = useStyles();
   const [openVerifyOTP, setOpenVerifyOTP] = useState(false);
   const [stepCurrent, setStepCurrent] = useState(STEP_KHHH.step3);
-  const [dataForm, setDataForm] = useState({});
+
+  const [dataForm, setDataForm] = useState({
+    account: "",
+    company: "",
+    location: "",
+    transferInternet: false,
+    transferAuto: false,
+    transferBonds: false,
+    ekycData: null,
+  });
 
   const _onNextStep = (step: string) => {
     setStepCurrent(step);

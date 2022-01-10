@@ -6,3 +6,6 @@ export interface FormDataStep1 {
   transferAuto: boolean;
   transferBonds: boolean;
 }
+export interface FormDataFinal extends FormDataStep1 {
+  ekycData: any;
+}
