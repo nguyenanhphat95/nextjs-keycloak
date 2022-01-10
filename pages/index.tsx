@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Script from "next/script";
 
 import { makeStyles } from "@mui/styles";
-import { Grid, Modal, Box } from "@mui/material";
+import { Dialog, Box } from "@mui/material";
 
 import {
   FormTKCKPage,
@@ -18,6 +18,11 @@ const useStyles = makeStyles(() => ({
   root: {
     background: "#F2F2F4",
     height: "100vh",
+  },
+  dialogCustom: {
+    "& .MuiPaper-root": {
+      margin: 0,
+    },
   },
   otpContainer: {
     background: "#FAFAFA",
@@ -83,6 +88,12 @@ const Home = () => {
     _toggleModalVerifyOTP();
   };
 
+  const _handleVerifyOtp = (otp: string) => {
+    // TODO: verify OTP
+    _toggleModalVerifyOTP();
+    _onNextStep(STEP_KHHH.step4);
+  };
+
   return (
     <>
       <Script id="lottie-id" src="/asset/js/lottie.min.js" />
@@ -103,34 +114,15 @@ const Home = () => {
           {stepCurrent === STEP_KHHH.step4 && <RegisterSuccessPage />}
         </TKCKContext.Provider>
       </div>
-      {/* <Modal open={openEKYCNote} onClose={_toggleModalEKYCNote}>
-        <Grid
-          className={classes.h100}
-          container
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Grid item xs={11}>
-            <Card>
-              <EKYCNote />
-            </Card>
-          </Grid>
-        </Grid>
-      </Modal> */}
-      <Modal open={openVerifyOTP} onClose={_toggleModalVerifyOTP}>
-        <Grid
-          className={classes.h100}
-          container
-          justifyContent="center"
-          alignItems="flex-end"
-        >
-          <Grid item xs={11}>
-            <Box px={1} py={2} className={classes.otpContainer}>
-              <VerifyOTP />
-            </Box>
-          </Grid>
-        </Grid>
-      </Modal>
+      <Dialog
+        className={classes.dialogCustom}
+        open={openVerifyOTP}
+        onClose={_toggleModalVerifyOTP}
+      >
+        <Box px={1} py={2} className={classes.otpContainer}>
+          <VerifyOTP onSubmit={_handleVerifyOtp} />
+        </Box>
+      </Dialog>
     </>
   );
 };

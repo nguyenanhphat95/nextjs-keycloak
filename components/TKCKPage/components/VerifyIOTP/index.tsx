@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, Box, Grid } from "@mui/material";
+import React, { useState } from "react";
+import { Card, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import InputOTP from "components/commons/InputOTP";
 import ButtonCustom from "components/commons/Button";
@@ -25,8 +25,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const VerifyOTP = () => {
+interface Props {
+  onSubmit?: (otp: string) => void;
+}
+
+const VerifyOTP = (props: Props) => {
+  const { onSubmit } = props;
   const classes = useStyles();
+  const [otp, setOtp] = useState("");
   return (
     <div className={classes.root}>
       <Card>
@@ -39,11 +45,18 @@ const VerifyOTP = () => {
         <Box p={2}>
           <InputOTP
             label={<div className={classes.textLabelOtp}>Nhập mã OTP</div>}
+            onChange={setOtp}
           />
         </Box>
       </Card>
       <Box px={2} mt={4}>
-        <ButtonCustom fullWidth variant="contained" color="secondary">
+        <ButtonCustom
+          disabled={otp.length < 6}
+          fullWidth
+          variant="contained"
+          color="secondary"
+          onClick={() => onSubmit && onSubmit(otp)}
+        >
           Xác nhận
         </ButtonCustom>
       </Box>
