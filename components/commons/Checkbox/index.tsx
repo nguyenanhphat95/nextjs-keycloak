@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     "& svg": {
       color: theme.palette.secondary.dark,
+      // background: "black",
     },
   },
 }));
@@ -24,7 +25,7 @@ const CheckboxCustom = (props: Props) => {
       <Grid item xs={true}>
         <FormControlLabel
           className={classes.root}
-          control={<Checkbox />}
+          control={<Checkbox {...rest} />}
           label={label || ""}
         />
       </Grid>

@@ -17,9 +17,6 @@ const useStyles = makeStyles(() => ({
     fontSize: 18,
     fontWeight: 500,
   },
-  warningIcon: {
-    width: "20px !important",
-  },
 }));
 
 interface Props {
@@ -43,7 +40,12 @@ const FormTKCKPage = (props: Props) => {
   const { onSubmit } = props;
   const classes = useStyles();
   const [data, setData] = useState({
-    accountTKTT: "",
+    account: "",
+    company: "",
+    location: "",
+    transferInternet: true,
+    transferAuto: true,
+    transferBonds: true,
   });
   return (
     <div className={classes.root}>
@@ -54,7 +56,7 @@ const FormTKCKPage = (props: Props) => {
           </Grid>
           <Grid item>
             <SelectCustom
-              value=""
+              value={data.account}
               placeholder="Chọn TKTT"
               options={LIST_TKTT}
               fullWidth
@@ -68,7 +70,7 @@ const FormTKCKPage = (props: Props) => {
           </Grid>
           <Grid item>
             <SelectCustom
-              value=""
+              value={data.account}
               placeholder="Chọn công ty CK"
               options={LIST_COMPANY}
               fullWidth
@@ -76,7 +78,7 @@ const FormTKCKPage = (props: Props) => {
           </Grid>
           <Grid item>
             <SelectCustom
-              value=""
+              value={data.location}
               placeholder="Chọn địa điểm mở TKCK"
               options={[]}
               fullWidth
@@ -88,17 +90,24 @@ const FormTKCKPage = (props: Props) => {
           <Grid container direction="column" spacing={1}>
             <Grid item>
               <CheckboxCustom
-                endIcon={
-                  <Image className={classes.warningIcon} src={warningIcon} />
-                }
+                checked={data.transferInternet}
+                endIcon={<Image width={20} height={20} src={warningIcon} />}
                 label="Giao dịch qua Internet (Web và App)"
               />
             </Grid>
             <Grid item>
-              <CheckboxCustom label="Ứng trước tiền bán chứng khoán tự động" />
+              <CheckboxCustom
+                checked={data.transferAuto}
+                endIcon={<Image width={20} height={20} src={warningIcon} />}
+                label="Ứng trước tiền bán chứng khoán tự động"
+              />
             </Grid>
             <Grid item>
-              <CheckboxCustom label="Giao dịch trái phiếu phát hành riêng lẻ" />
+              <CheckboxCustom
+                checked={data.transferBonds}
+                endIcon={<Image width={20} height={20} src={warningIcon} />}
+                label="Giao dịch trái phiếu phát hành riêng lẻ"
+              />
             </Grid>
           </Grid>
         </Box>
