@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import Script from "next/script";
 
 import { makeStyles } from "@mui/styles";
-import { Card, Grid, Modal, Box } from "@mui/material";
+import { Grid, Modal, Box } from "@mui/material";
 
 import {
   FormTKCKPage,
   EKYCVerifyPage,
   ConfirmInfoPage,
   RegisterSuccessPage,
-  EKYCNote,
   VerifyOTP,
 } from "components/TKCKPage";
 import TKCKContext from "components/TKCKPage/contexts/TKCKContextValue";
+import { FormDataStep1 } from "components/TKCKPage/interfaces";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -36,23 +36,27 @@ export const STEP_KHHH = {
 
 const Home = () => {
   const classes = useStyles();
-  // const [openEKYCNote, setOpenEKYCNote] = useState(false);
   const [openVerifyOTP, setOpenVerifyOTP] = useState(false);
-  const [stepCurrent, setStepCurrent] = useState(STEP_KHHH.step1);
+  const [stepCurrent, setStepCurrent] = useState(STEP_KHHH.step2);
   const [dataForm, setDataForm] = useState({});
 
   const _onNextStep = (step: string) => {
     setStepCurrent(step);
   };
 
-  // const _toggleModalEKYCNote = () => {
-  //   setOpenEKYCNote((prev) => !prev);
-  // };
   const _toggleModalVerifyOTP = () => {
     setOpenVerifyOTP((prev) => !prev);
   };
 
   const TKCKContextValue = {};
+
+  const _handleSubmitStep1 = (data: FormDataStep1) => {
+    setDataForm({
+      ...dataForm,
+      ...data,
+    });
+    _onNextStep(STEP_KHHH.step2);
+  };
 
   return (
     <>
@@ -63,7 +67,7 @@ const Home = () => {
       <div className={classes.root}>
         <TKCKContext.Provider value={TKCKContextValue}>
           {stepCurrent === STEP_KHHH.step1 && (
-            <FormTKCKPage onSubmit={() => _onNextStep(STEP_KHHH.step2)} />
+            <FormTKCKPage onSubmit={_handleSubmitStep1} />
           )}
           {stepCurrent === STEP_KHHH.step2 && <EKYCVerifyPage />}
           {stepCurrent === STEP_KHHH.step3 && <ConfirmInfoPage />}

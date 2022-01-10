@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 
 import { makeStyles } from "@mui/styles";
 import { Card, Grid, Box } from "@mui/material";
 import { ButtonCustom, CheckboxCustom, SelectCustom } from "components/commons";
-import warningIcon from "public/asset/images/warning.png";
 
+import * as hdbsServices from "services/hdbsService";
+import { AccountItem } from "interfaces/IListAccount";
+import { FormDataStep1 } from "../interfaces";
+
+import warningIcon from "public/asset/images/warning.png";
 import _get from "lodash/get";
 
 const useStyles = makeStyles(() => ({
@@ -19,26 +23,30 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const LIST_COMPANY = [
+  { id: "Company 1", value: "Company 1" },
+  { id: "Company 2", value: "Company 2" },
+  { id: "Company 3", value: "Company 3" },
+  { id: "Company 4", value: "Company 4" },
+];
+
+const LIST_LOCATION = [
+  { id: 1, value: "Location 1" },
+  { id: 2, value: "Location 2" },
+  { id: 3, value: "Location 3" },
+  { id: 4, value: "Location 4" },
+];
 interface Props {
-  onSubmit: () => void;
+  onSubmit: (data: FormDataStep1) => void;
 }
 
-const LIST_TKTT = [
-  { id: 1, value: "Tài khoản 1" },
-  { id: 2, value: "Tài khoản 2" },
-  { id: 3, value: "Tài khoản 3" },
-];
-
-const LIST_COMPANY = [
-  { id: 1, value: "Company 1" },
-  { id: 2, value: "Company 2" },
-  { id: 3, value: "Company 3" },
-  { id: 4, value: "Company 4" },
-];
+const clientNo = "00012132";
 
 const FormTKCKPage = (props: Props) => {
   const { onSubmit } = props;
   const classes = useStyles();
+
+  const [listAccount, setListAccount] = useState<AccountItem[]>([]);
   const [data, setData] = useState({
     account: "",
     company: "",
@@ -47,6 +55,32 @@ const FormTKCKPage = (props: Props) => {
     transferAuto: true,
     transferBonds: true,
   });
+
+  useEffect(() => {
+    hdbsServices.getListAccountApi(clientNo).then((res) => {
+      const listAccount = _get(res, "data.data", []);
+      setListAccount(listAccount);
+    });
+  }, []);
+
+  const listAccountNew = useMemo(() => {
+    return (listAccount || []).map((item) => ({
+      id: item.accountNo,
+      value: item.accountNo,
+    }));
+  }, [listAccount]);
+
+  const _handleChange = (field: string, value: string) => {
+    setData({
+      ...data,
+      [field]: value,
+    });
+  };
+
+  const _getListLocationByCompany = (company: string) => {
+    // TODO api get location
+  };
+
   return (
     <div className={classes.root}>
       <Card className={classes.content}>
@@ -58,10 +92,10 @@ const FormTKCKPage = (props: Props) => {
             <SelectCustom
               value={data.account}
               placeholder="Chọn TKTT"
-              options={LIST_TKTT}
+              options={listAccountNew}
               fullWidth
               onChange={(event) => {
-                console.log("value", _get(event, "target.value"));
+                _handleChange("account", _get(event, "target.value"));
               }}
             />
           </Grid>
@@ -70,18 +104,25 @@ const FormTKCKPage = (props: Props) => {
           </Grid>
           <Grid item>
             <SelectCustom
-              value={data.account}
+              value={data.company}
               placeholder="Chọn công ty CK"
               options={LIST_COMPANY}
               fullWidth
+              onChange={(event) => {
+                _handleChange("company", _get(event, "target.value"));
+                _getListLocationByCompany(_get(event, "target.value"));
+              }}
             />
           </Grid>
           <Grid item>
             <SelectCustom
               value={data.location}
               placeholder="Chọn địa điểm mở TKCK"
-              options={[]}
+              options={LIST_LOCATION}
               fullWidth
+              onChange={(event) => {
+                _handleChange("location", _get(event, "target.value"));
+              }}
             />
           </Grid>
         </Grid>
@@ -93,6 +134,12 @@ const FormTKCKPage = (props: Props) => {
                 checked={data.transferInternet}
                 endIcon={<Image width={20} height={20} src={warningIcon} />}
                 label="Giao dịch qua Internet (Web và App)"
+                onChange={(event) => {
+                  _handleChange(
+                    "transferInternet",
+                    _get(event, "target.checked", false)
+                  );
+                }}
               />
             </Grid>
             <Grid item>
@@ -100,6 +147,12 @@ const FormTKCKPage = (props: Props) => {
                 checked={data.transferAuto}
                 endIcon={<Image width={20} height={20} src={warningIcon} />}
                 label="Ứng trước tiền bán chứng khoán tự động"
+                onChange={(event) => {
+                  _handleChange(
+                    "transferAuto",
+                    _get(event, "target.checked", false)
+                  );
+                }}
               />
             </Grid>
             <Grid item>
@@ -107,6 +160,12 @@ const FormTKCKPage = (props: Props) => {
                 checked={data.transferBonds}
                 endIcon={<Image width={20} height={20} src={warningIcon} />}
                 label="Giao dịch trái phiếu phát hành riêng lẻ"
+                onChange={(event) => {
+                  _handleChange(
+                    "transferBonds",
+                    _get(event, "target.checked", false)
+                  );
+                }}
               />
             </Grid>
           </Grid>
@@ -115,7 +174,7 @@ const FormTKCKPage = (props: Props) => {
 
       <Box px={3} py={1}>
         <ButtonCustom
-          onClick={onSubmit}
+          onClick={() => onSubmit(data)}
           fullWidth
           variant="contained"
           color="secondary"
