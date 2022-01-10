@@ -8,12 +8,18 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
   },
 }));
-const EKYCVerifyPage = () => {
+
+interface Props {
+  onSubmit: (data: any) => void;
+}
+
+const EKYCVerifyPage = (props: Props) => {
   const classes = useStyles();
+  const { onSubmit } = props;
 
   return (
     <div className={classes.root}>
-      <EKYCComponent />
+      <EKYCComponent onFinish={onSubmit} />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { PARTNER_ID, SIGNATURE } from "commons/constants";
 import { v4 as uuidv4 } from "uuid";
+import _get from "lodash/get";
 
 export const generateRequestBody = () => {
   return {
@@ -43,4 +44,20 @@ export const startTimer = async (
       }
     }, 1000);
   });
+};
+
+export const parseInfoFromEKYC = (ekycData: any) => {
+  if (!ekycData) {
+    return {};
+  }
+  return {
+    username: _get(ekycData, "ocr.object.name", ""),
+    gender: _get(ekycData, "ocr.object.gender", ""),
+    birthday: _get(ekycData, "ocr.object.birth_day", ""),
+    identification: _get(ekycData, "ocr.object.id", ""),
+    issue_date: _get(ekycData, "ocr.object.issue_date", ""),
+    issue_place: _get(ekycData, "ocr.object.issue_place", ""),
+    recent_location: _get(ekycData, "ocr.object.recent_location", ""),
+    nationality: _get(ekycData, "ocr.object.nationality", ""),
+  };
 };

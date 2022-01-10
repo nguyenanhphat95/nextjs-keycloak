@@ -58,6 +58,17 @@ const Home = () => {
     _onNextStep(STEP_KHHH.step2);
   };
 
+  const _handleSubmitStep2 = (data: any) => {
+    if (!data) {
+      return;
+    }
+    setDataForm({
+      ...dataForm,
+      ekycData: data,
+    });
+    _onNextStep(STEP_KHHH.step3);
+  };
+
   return (
     <>
       <Script id="lottie-id" src="/asset/js/lottie.min.js" />
@@ -69,7 +80,9 @@ const Home = () => {
           {stepCurrent === STEP_KHHH.step1 && (
             <FormTKCKPage onSubmit={_handleSubmitStep1} />
           )}
-          {stepCurrent === STEP_KHHH.step2 && <EKYCVerifyPage />}
+          {stepCurrent === STEP_KHHH.step2 && (
+            <EKYCVerifyPage onSubmit={_handleSubmitStep2} />
+          )}
           {stepCurrent === STEP_KHHH.step3 && <ConfirmInfoPage />}
           {stepCurrent === STEP_KHHH.step4 && <RegisterSuccessPage />}
         </TKCKContext.Provider>

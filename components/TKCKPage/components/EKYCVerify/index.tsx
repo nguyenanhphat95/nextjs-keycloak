@@ -1,7 +1,24 @@
 import React, { useEffect } from "react";
+import { makeStyles } from "@mui/styles";
+import { Theme } from "@mui/material";
 import _get from "lodash/get";
 
-const EKYCComponent = () => {
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    // [theme.breakpoints.down("sm")]: {
+    width: 375,
+    margin: "0 auto",
+    // },
+  },
+}));
+
+interface Props {
+  onFinish?: (data: any) => void;
+}
+
+const EKYCComponent = (props: Props) => {
+  const classes = useStyles();
+  const { onFinish } = props;
   useEffect(() => {
     callEkyc();
   }, []);
@@ -198,9 +215,8 @@ const EKYCComponent = () => {
                 TYPE_DOCUMENT: data.type_document,
               },
               (res: any) => {
-                const merged = { ...data, ...res };
-                console.log("ekyc data :", merged);
-                // setIsShowEkycFailPopup(false);
+                const result = { ...data, ...res };
+                onFinish && onFinish(result);
               }
             );
             return;
@@ -213,7 +229,11 @@ const EKYCComponent = () => {
     }
   }
 
-  return <div id="ekyc_sdk_intergrated"></div>;
+  return (
+    <div className={classes.root}>
+      <div id="ekyc_sdk_intergrated"></div>
+    </div>
+  );
 };
 
 export default EKYCComponent;
