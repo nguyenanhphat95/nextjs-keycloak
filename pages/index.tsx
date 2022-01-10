@@ -83,7 +83,9 @@ const Home = () => {
           {stepCurrent === STEP_KHHH.step2 && (
             <EKYCVerifyPage onSubmit={_handleSubmitStep2} />
           )}
-          {stepCurrent === STEP_KHHH.step3 && <ConfirmInfoPage />}
+          {stepCurrent === STEP_KHHH.step3 && (
+            <ConfirmInfoPage data={dataForm} />
+          )}
           {stepCurrent === STEP_KHHH.step4 && <RegisterSuccessPage />}
         </TKCKContext.Provider>
       </div>
