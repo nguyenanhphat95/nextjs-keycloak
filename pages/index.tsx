@@ -78,6 +78,11 @@ const Home = () => {
     _onNextStep(STEP_KHHH.step3);
   };
 
+  const _handleSubmitStep3 = () => {
+    // TODO: api send OTP
+    _toggleModalVerifyOTP();
+  };
+
   return (
     <>
       <Script id="lottie-id" src="/asset/js/lottie.min.js" />
@@ -93,7 +98,7 @@ const Home = () => {
             <EKYCVerifyPage onSubmit={_handleSubmitStep2} />
           )}
           {stepCurrent === STEP_KHHH.step3 && (
-            <ConfirmInfoPage data={dataForm} />
+            <ConfirmInfoPage data={dataForm} onSubmit={_handleSubmitStep3} />
           )}
           {stepCurrent === STEP_KHHH.step4 && <RegisterSuccessPage />}
         </TKCKContext.Provider>

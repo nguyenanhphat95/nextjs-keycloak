@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: "4px",
     border: "1px solid rgba(0, 0, 0, 0.3)",
     [theme.breakpoints.down("sm")]: {
-      width: "2.5rem",
-      height: "2.5rem",
+      width: "2rem",
+      height: "2rem",
     },
   },
 }));

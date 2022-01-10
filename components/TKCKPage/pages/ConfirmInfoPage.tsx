@@ -24,10 +24,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {
   data: FormDataFinal;
+  onSubmit: () => void;
 }
 
 const ConfirmInfoPage = (props: Props) => {
-  const { data } = props;
+  const { data, onSubmit } = props;
   const classes = useStyles();
   const [isAceptCondition, setIsAceptCondition] = useState(false);
 
@@ -75,10 +76,10 @@ const ConfirmInfoPage = (props: Props) => {
             Địa chỉ email: <b>email</b>
           </Grid>
           <Grid item>
-            Địa điểm mở TKCK: <b></b>
+            Địa điểm mở TKCK: <b>{data.location}</b>
           </Grid>
           <Grid item>
-            Số TKTT tại HDBank: <b></b>
+            Số TKTT tại HDBank: <b>{data.account}</b>
           </Grid>
         </Grid>
       </Box>
@@ -108,6 +109,7 @@ const ConfirmInfoPage = (props: Props) => {
           fullWidth
           variant="contained"
           color="secondary"
+          onClick={onSubmit}
         >
           Tiếp tục
         </ButtonCustom>
