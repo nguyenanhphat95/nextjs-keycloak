@@ -50,6 +50,7 @@ export const parseInfoFromEKYC = (ekycData: any) => {
   if (!ekycData) {
     return {};
   }
+  // số điên thoai không có
   return {
     username: _get(ekycData, "ocr.object.name", ""),
     gender: _get(ekycData, "ocr.object.gender", ""),
