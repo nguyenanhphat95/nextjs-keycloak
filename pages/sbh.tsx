@@ -143,7 +143,8 @@ const SBHPage = () => {
         _toggleLoading("loadingBtnSubmit");
 
         if (responseCode === ERROR_CODE.Success) {
-          stkService.getListAccountApi(data.username).then((res) => {
+          const cif = _get(res, "data.data.cif");
+          stkService.getListAccountApi(cif).then((res) => {
             setListAccount(_get(res, "data.data", []));
           });
           usernameRef.current = data.username;
