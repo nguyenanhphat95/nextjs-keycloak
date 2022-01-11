@@ -98,7 +98,7 @@ const EKYCComponent = (props: Props) => {
             start_button_color: "#111127",
           },
           CAPTURE_IMAGE_STYLE: {
-            header_title_style: { color: "red" },
+            header_title_style: { color: "black" },
             webcam_streaming_style: {
               margin: "20px 0 20px 0",
               padding: "10px",
@@ -111,10 +111,8 @@ const EKYCComponent = (props: Props) => {
               display: "block",
             },
             capture_btn_style: {
-              display: "flex",
-              "background-color": "yellow",
               "border-radius": "16px",
-              width: "150px",
+              width: "300px",
             },
             capture_btn_text_style: {
               "font-size": "18px",
@@ -182,7 +180,7 @@ const EKYCComponent = (props: Props) => {
             oval_web: VNPT_CDN + "/kbsv/web_border.json",
             oval_mobile: VNPT_CDN + "/kbsv/mobile_border.json",
             notice_ani: VNPT_CDN + "/animation/cautionHDB.json",
-            oval_title_color: "white",
+            oval_title_color: "black",
             description_oval_content:
               "Vui lòng tháo kính để xác thực chính xác hơn!",
             description_oval_style: {

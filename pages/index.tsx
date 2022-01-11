@@ -42,7 +42,7 @@ export const STEP_KHHH = {
 const Home = () => {
   const classes = useStyles();
   const [openVerifyOTP, setOpenVerifyOTP] = useState(false);
-  const [stepCurrent, setStepCurrent] = useState(STEP_KHHH.step3);
+  const [stepCurrent, setStepCurrent] = useState(STEP_KHHH.step4);
 
   const [dataForm, setDataForm] = useState({
     account: "",
