@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   textSubTitle: {
     fontSize: 18,
   },
+  ratingWrapper: {
+    background: "#FAFAFA",
+  },
   imageRatingWrapper: {
     "& span": {
       width: "100% !important",
@@ -35,7 +38,7 @@ const RegisterSuccessPage = () => {
       <Card>
         <Box p={2}>
           <Box>
-            <Image src={hdbsLogo} alt="hdbs-logo" />
+            <Image width={100} height={40} src={hdbsLogo} alt="hdbs-logo" />
           </Box>
           <Grid container direction="column" spacing={1}>
             <Grid item>
@@ -68,23 +71,23 @@ const RegisterSuccessPage = () => {
               khách vui lòng liên hệ hotline của HDBS theo số xxxxxxxxxxx
             </Grid>
           </Grid>
+        </Box>
 
-          <Box mt={4}>
-            <Grid container spacing={1}>
-              <Grid item xs={8}>
-                Quý khách đã thực hiện đăng ký mở tài khoản chứng khoán thành
-                công. Quý khách đánh giá giao dịch này thế nào ?
-              </Grid>
-              <Grid item xs={4} className={classes.imageRatingWrapper}>
-                <Image
-                  width={50}
-                  height={50}
-                  src={ratingIcon}
-                  alt="rating-icon"
-                />
-              </Grid>
+        <Box className={classes.ratingWrapper} p={2} mt={4}>
+          <Grid container spacing={1}>
+            <Grid item xs={8}>
+              Quý khách đã thực hiện đăng ký mở tài khoản chứng khoán thành
+              công. Quý khách đánh giá giao dịch này thế nào ?
             </Grid>
-          </Box>
+            <Grid item xs={4} className={classes.imageRatingWrapper}>
+              <Image
+                width={50}
+                height={50}
+                src={ratingIcon}
+                alt="rating-icon"
+              />
+            </Grid>
+          </Grid>
         </Box>
       </Card>
 
