@@ -5,9 +5,12 @@ import { makeStyles } from "@mui/styles";
 import { Card, Grid, Box } from "@mui/material";
 import { ButtonCustom, CheckboxCustom, SelectCustom } from "components/commons";
 
-import * as hdbsServices from "services/hdbsService";
+import { MerchantNameItem, TerminalNameItem } from "interfaces/IGetMerchant";
 import { AccountItem } from "interfaces/IListAccount";
 import { FormDataStep1 } from "../interfaces";
+import { OptionSelectType } from "commons/constants/types";
+
+import * as hdbsServices from "services/hdbsService";
 
 import warningIcon from "public/asset/images/warning.png";
 import _get from "lodash/get";
@@ -23,19 +26,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LIST_COMPANY = [
-  { id: "Company 1", value: "Company 1" },
-  { id: "Company 2", value: "Company 2" },
-  { id: "Company 3", value: "Company 3" },
-  { id: "Company 4", value: "Company 4" },
-];
-
-const LIST_LOCATION = [
-  { id: 1, value: "Location 1" },
-  { id: 2, value: "Location 2" },
-  { id: 3, value: "Location 3" },
-  { id: 4, value: "Location 4" },
-];
 interface Props {
   onSubmit: (data: FormDataStep1) => void;
 }
@@ -47,6 +37,9 @@ const FormTKCKPage = (props: Props) => {
   const classes = useStyles();
 
   const [listAccount, setListAccount] = useState<AccountItem[]>([]);
+  const [listMerchant, setListMerchant] = useState<MerchantNameItem[]>([]);
+  const [listTerminal, setListTerminal] = useState<TerminalNameItem[]>([]);
+
   const [data, setData] = useState({
     account: "",
     company: "",
@@ -63,6 +56,13 @@ const FormTKCKPage = (props: Props) => {
     });
   }, []);
 
+  useEffect(() => {
+    hdbsServices.getMerchant().then((res) => {
+      setListMerchant(res.data.merchantNames);
+      setListTerminal(res.data.ternimalNames);
+    });
+  }, []);
+
   const listAccountNew = useMemo(() => {
     return (listAccount || []).map((item) => ({
       id: item.accountNo,
@@ -70,15 +70,42 @@ const FormTKCKPage = (props: Props) => {
     }));
   }, [listAccount]);
 
+  const listMerchantNew = useMemo(() => {
+    return (listMerchant || []).map((item) => ({
+      id: item.merchantId,
+      value: item.merchantName,
+    }));
+  }, [listMerchant]);
+
+  const listTerminalNew = useMemo(() => {
+    if (!listTerminal.length || !data.company) {
+      return [];
+    }
+    const listData: OptionSelectType[] = [];
+    listTerminal.forEach((item) => {
+      if (item.merchantId === data.company) {
+        listData.push({
+          id: item.terminalId,
+          value: item.terminalName,
+        });
+      }
+    });
+    return listData;
+  }, [listTerminal, data.company]);
+
   const _handleChange = (field: string, value: string) => {
+    if (field === "company") {
+      setData({
+        ...data,
+        location: "",
+        [field]: value,
+      });
+      return;
+    }
     setData({
       ...data,
       [field]: value,
     });
-  };
-
-  const _getListLocationByCompany = (company: string) => {
-    // TODO api get location
   };
 
   return (
@@ -106,11 +133,10 @@ const FormTKCKPage = (props: Props) => {
             <SelectCustom
               value={data.company}
               placeholder="Chọn công ty CK"
-              options={LIST_COMPANY}
+              options={listMerchantNew}
               fullWidth
               onChange={(event) => {
                 _handleChange("company", _get(event, "target.value"));
-                _getListLocationByCompany(_get(event, "target.value"));
               }}
             />
           </Grid>
@@ -118,7 +144,7 @@ const FormTKCKPage = (props: Props) => {
             <SelectCustom
               value={data.location}
               placeholder="Chọn địa điểm mở TKCK"
-              options={LIST_LOCATION}
+              options={listTerminalNew}
               fullWidth
               onChange={(event) => {
                 _handleChange("location", _get(event, "target.value"));

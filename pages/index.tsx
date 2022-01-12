@@ -14,6 +14,8 @@ import {
 import TKCKContext from "components/TKCKPage/contexts/TKCKContextValue";
 import { FormDataStep1 } from "components/TKCKPage/interfaces";
 
+import * as hdbsServices from "services/hdbsService";
+
 const useStyles = makeStyles(() => ({
   root: {
     background: "#F2F2F4",
@@ -42,7 +44,7 @@ export const STEP_KHHH = {
 const Home = () => {
   const classes = useStyles();
   const [openVerifyOTP, setOpenVerifyOTP] = useState(false);
-  const [stepCurrent, setStepCurrent] = useState(STEP_KHHH.step1);
+  const [stepCurrent, setStepCurrent] = useState(STEP_KHHH.step3);
 
   const [dataForm, setDataForm] = useState({
     account: "",
@@ -69,7 +71,14 @@ const Home = () => {
       ...dataForm,
       ...data,
     });
-    _onNextStep(STEP_KHHH.step2);
+    hdbsServices.checkUserEKYC().then((res) => {
+      if (res.data.hasSendOtp) {
+        // User EKYCED
+        _onNextStep(STEP_KHHH.step4);
+        return;
+      }
+      _onNextStep(STEP_KHHH.step2);
+    });
   };
 
   const _handleSubmitStep2 = (data: any) => {
