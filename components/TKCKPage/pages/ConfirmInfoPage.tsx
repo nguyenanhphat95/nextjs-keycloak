@@ -311,7 +311,7 @@ const ConfirmInfoPage = (props: Props) => {
   const _handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsAceptCondition(event.target.checked);
   };
-  const info = parseInfoFromEKYC(data.ekycData);
+  const info = parseInfoFromEKYC(MOCK_DATA);
 
   return (
     <div className={classes.root}>
@@ -319,28 +319,28 @@ const ConfirmInfoPage = (props: Props) => {
       <Box mt={1} className={classes.content}>
         <Grid container direction="column" spacing={1}>
           <Grid item>
-            Tên khách hàng: <b>{info?.username}</b>
+            Tên khách hàng: <b>{info?.fullNameOcr}</b>
           </Grid>
           <Grid item>
             Giới tính: <b>{info?.gender}</b>
           </Grid>
           <Grid item>
-            Ngày sinh: <b>{info?.birthday}</b>
+            Ngày sinh: <b>{info?.birthDateOcr}</b>
           </Grid>
           <Grid item>
-            CMND/CCCD: <b>{info?.identification}</b>
+            CMND/CCCD: <b>{info?.idNumber}</b>
           </Grid>
           <Grid item>
-            Ngày cấp: <b>{info?.issue_date}</b>
+            Ngày cấp: <b>{info?.dateOfIssueOcr}</b>
           </Grid>
           <Grid item>
-            Nơi cấp: <b>{info?.issue_place}</b>
+            Nơi cấp: <b>{info?.placeOfIssueOcr}</b>
           </Grid>
           <Grid item>
             Địa chỉ tường trú: <b>{info?.recent_location}</b>
           </Grid>
           <Grid item>
-            Quốc tịch: <b>{info?.nationality}</b>
+            Quốc tịch: <b>{info?.nationalityId}</b>
           </Grid>
           <Grid item>
             Số điện thoại: <b>0962486390</b>

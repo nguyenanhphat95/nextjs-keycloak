@@ -23,6 +23,7 @@ export interface InquiryEKYCPresentRequest {
   idNumber: string;
   idNumberType: string;
   idNumberOld: string;
+
   gender: Gender;
   address: string;
   stateIdContact: string;

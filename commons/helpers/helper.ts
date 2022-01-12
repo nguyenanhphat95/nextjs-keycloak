@@ -51,13 +51,14 @@ export const parseInfoFromEKYC = (ekycData: any) => {
     return {};
   }
   return {
-    username: _get(ekycData, "ocr.object.name", ""),
+    idNumber: _get(ekycData, "ocr.object.id", ""),
+    fullNameOcr: _get(ekycData, "ocr.object.name", ""),
     gender: _get(ekycData, "ocr.object.gender", ""),
-    birthday: _get(ekycData, "ocr.object.birth_day", ""),
-    identification: _get(ekycData, "ocr.object.id", ""),
-    issue_date: _get(ekycData, "ocr.object.issue_date", ""),
-    issue_place: _get(ekycData, "ocr.object.issue_place", ""),
+    birthDateOcr: _get(ekycData, "ocr.object.birth_day", ""),
+    dateOfIssueOcr: _get(ekycData, "ocr.object.issue_date", ""),
+    placeOfIssueOcr: _get(ekycData, "ocr.object.issue_place", ""),
+
     recent_location: _get(ekycData, "ocr.object.recent_location", ""),
-    nationality: _get(ekycData, "ocr.object.nationality", ""),
+    nationalityId: _get(ekycData, "ekycData.ocr.object.id", ""),
   };
 };
