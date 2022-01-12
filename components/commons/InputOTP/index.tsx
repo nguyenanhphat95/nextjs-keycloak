@@ -87,9 +87,9 @@ const InputOTP = (props: Props) => {
       }
     } else {
       const next = _get(e, "target.tabIndex");
-      const value = e.key;
+      const value = _get(e, "target.value");
 
-      if (next < 6 && isNumber(+value)) {
+      if (next < 6 && value && isNumber(+value)) {
         const element = _get(e, `target.form.elements[${next}]`);
         element && element.focus();
       }
