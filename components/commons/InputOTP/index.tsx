@@ -98,7 +98,7 @@ const InputOTP = (props: Props) => {
 
   return (
     <form>
-      <Grid justifyContent="center" container spacing={2}>
+      <Grid wrap="nowrap" justifyContent="center" container spacing={2}>
         <Grid item xs="auto">
           <input
             ref={otpEl1}
