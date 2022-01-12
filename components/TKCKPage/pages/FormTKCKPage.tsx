@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 
 import { makeStyles } from "@mui/styles";
-import { Card, Grid, Box } from "@mui/material";
+import { Card, Grid, Box, Modal } from "@mui/material";
 import { ButtonCustom, CheckboxCustom, SelectCustom } from "components/commons";
 
 import { MerchantNameItem, TerminalNameItem } from "interfaces/IGetMerchant";
@@ -14,6 +14,7 @@ import * as hdbsServices from "services/hdbsService";
 
 import warningIcon from "public/asset/images/warning.png";
 import _get from "lodash/get";
+import { Information } from "..";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -23,6 +24,9 @@ const useStyles = makeStyles(() => ({
   title: {
     fontSize: 18,
     fontWeight: 500,
+  },
+  modalInfo: {
+    top: "unset",
   },
 }));
 
@@ -39,6 +43,8 @@ const FormTKCKPage = (props: Props) => {
   const [listAccount, setListAccount] = useState<AccountItem[]>([]);
   const [listMerchant, setListMerchant] = useState<MerchantNameItem[]>([]);
   const [listTerminal, setListTerminal] = useState<TerminalNameItem[]>([]);
+
+  const [openModalInfo, setOpenModalInfo] = useState(true);
 
   const [data, setData] = useState({
     account: "",
@@ -108,6 +114,11 @@ const FormTKCKPage = (props: Props) => {
     });
   };
 
+  const _handleShowInfo = (key: string) => {};
+
+  const _toggleModalInfo = () => {
+    setOpenModalInfo((prev) => !prev);
+  };
   return (
     <div className={classes.root}>
       <Card className={classes.content}>
@@ -160,6 +171,7 @@ const FormTKCKPage = (props: Props) => {
                 checked={data.transferInternet}
                 endIcon={<Image width={20} height={20} src={warningIcon} />}
                 label="Giao dịch qua Internet (Web và App)"
+                onClickEndIcon={() => _handleShowInfo("transferInternet")}
                 onChange={(event) => {
                   _handleChange(
                     "transferInternet",
@@ -208,6 +220,14 @@ const FormTKCKPage = (props: Props) => {
           Tiếp tục
         </ButtonCustom>
       </Box>
+
+      <Modal
+        className={classes.modalInfo}
+        open={openModalInfo}
+        onClose={_toggleModalInfo}
+      >
+        <Information />
+      </Modal>
     </div>
   );
 };

@@ -15,10 +15,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props extends CheckboxProps {
   label?: string | React.ReactElement;
   endIcon?: React.ReactElement;
+  onClickEndIcon?: () => void;
 }
 const CheckboxCustom = (props: Props) => {
   const classes = useStyles();
-  const { label, endIcon, ...rest } = props;
+  const { label, endIcon, onClickEndIcon, ...rest } = props;
 
   return (
     <Grid wrap="nowrap" container alignItems="center">
@@ -30,7 +31,7 @@ const CheckboxCustom = (props: Props) => {
         />
       </Grid>
       {endIcon && (
-        <Grid item xs="auto">
+        <Grid onClick={() => onClickEndIcon && onClickEndIcon()} item xs="auto">
           {endIcon}
         </Grid>
       )}

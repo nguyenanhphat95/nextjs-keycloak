@@ -12,14 +12,14 @@ import {
   VerifyOTP,
 } from "components/TKCKPage";
 import TKCKContext from "components/TKCKPage/contexts/TKCKContextValue";
-import { FormDataStep1 } from "components/TKCKPage/interfaces";
+import { FormDataStep1, TypeCustomer } from "components/TKCKPage/interfaces";
 
 import * as hdbsServices from "services/hdbsService";
 
 const useStyles = makeStyles(() => ({
   root: {
     background: "#F2F2F4",
-    height: "100vh",
+    minHeight: "100vh",
   },
   dialogCustom: {
     "& .MuiPaper-root": {
@@ -44,7 +44,9 @@ export const STEP_KHHH = {
 const Home = () => {
   const classes = useStyles();
   const [openVerifyOTP, setOpenVerifyOTP] = useState(false);
-  const [stepCurrent, setStepCurrent] = useState(STEP_KHHH.step3);
+
+  const [typeCustomer, setTypeCustomer] = useState(TypeCustomer.KHHH);
+  const [stepCurrent, setStepCurrent] = useState(STEP_KHHH.step1);
 
   const [dataForm, setDataForm] = useState({
     account: "",
@@ -118,7 +120,11 @@ const Home = () => {
             <EKYCVerifyPage onSubmit={_handleSubmitStep2} />
           )}
           {stepCurrent === STEP_KHHH.step3 && (
-            <ConfirmInfoPage data={dataForm} onSubmit={_handleSubmitStep3} />
+            <ConfirmInfoPage
+              typeCustomer={typeCustomer}
+              data={dataForm}
+              onSubmit={_handleSubmitStep3}
+            />
           )}
           {stepCurrent === STEP_KHHH.step4 && <RegisterSuccessPage />}
         </TKCKContext.Provider>

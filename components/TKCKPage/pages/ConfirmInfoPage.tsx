@@ -3,7 +3,7 @@ import { Grid, Box, Theme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ButtonCustom, CheckboxCustom } from "components/commons";
 import { parseInfoFromEKYC } from "commons/helpers";
-import { FormDataFinal } from "../interfaces";
+import { FormDataFinal, TypeCustomer } from "../interfaces";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   data: FormDataFinal;
   onSubmit: () => void;
+  typeCustomer: TypeCustomer;
 }
 
 const MOCK_DATA = {
@@ -304,8 +305,8 @@ const MOCK_DATA = {
 };
 
 const ConfirmInfoPage = (props: Props) => {
-  const { data, onSubmit } = props;
   const classes = useStyles();
+  const { data, onSubmit, typeCustomer } = props;
   const [isAceptCondition, setIsAceptCondition] = useState(false);
 
   const _handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -319,43 +320,108 @@ const ConfirmInfoPage = (props: Props) => {
       <Box mt={1} className={classes.content}>
         <Grid container direction="column" spacing={1}>
           <Grid item>
-            Tên khách hàng: <b>{info?.fullNameOcr}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Tên khách hàng:</Grid>
+              <Grid item>
+                <b>{info?.fullNameOcr}</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Giới tính: <b>{info?.gender}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Giới tính:</Grid>
+              <Grid item>
+                <b>{info?.gender}</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Ngày sinh: <b>{info?.birthDateOcr}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Ngày sinh:</Grid>
+              <Grid item>
+                <b>{info?.birthDateOcr}</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            CMND/CCCD: <b>{info?.idNumber}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>CMND/CCCD:</Grid>
+              <Grid item>
+                <b>{info?.idNumber}</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Ngày cấp: <b>{info?.dateOfIssueOcr}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Ngày cấp:</Grid>
+              <Grid item>
+                <b>{info?.dateOfIssueOcr}</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Nơi cấp: <b>{info?.placeOfIssueOcr}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Nơi cấp:</Grid>
+              <Grid item>
+                <b>{info?.placeOfIssueOcr}</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Địa chỉ tường trú: <b>{info?.recent_location}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Địa chỉ tường trú:</Grid>
+              <Grid item>
+                <b>{info?.recent_location}</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Quốc tịch: <b>{info?.nationalityId}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Quốc tịch:</Grid>
+              <Grid item>
+                <b>{info?.nationalityId}</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Số điện thoại: <b>0962486390</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item> Số điện thoại:</Grid>
+              <Grid item>
+                <b>0962486390</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Địa chỉ liên lạc: <b>{info?.recent_location}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Địa chỉ liên lạc:</Grid>
+              <Grid item>
+                <b>{info?.recent_location}</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Địa chỉ email: <b>email</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Địa chỉ email:</Grid>
+              <Grid item>
+                <b>email</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Địa điểm mở TKCK: <b>{data.location}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Địa điểm mở TKCK:</Grid>
+              <Grid item>
+                <b>{data.location}</b>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            Số TKTT tại HDBank: <b>{data.account}</b>
+            <Grid container spacing={1} direction="column">
+              <Grid item>Số TKTT tại HDBank:</Grid>
+              <Grid item>
+                <b>{data.account}</b>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Box>

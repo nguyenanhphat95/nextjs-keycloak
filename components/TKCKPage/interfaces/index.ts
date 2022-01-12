@@ -9,3 +9,8 @@ export interface FormDataStep1 {
 export interface FormDataFinal extends FormDataStep1 {
   ekycData: any;
 }
+
+export enum TypeCustomer {
+  KHHH = "KHHH",
+  KHM = "KHM",
+}
