@@ -1,5 +1,5 @@
-// dev-server.js
-require("dotenv").config(); // require dotenv
 const cli = require("next/dist/cli/next-dev");
+const env = require("@next/env");
 
-cli.nextDev(["-p", process.env.PORT || 3000]);
+const envConfig = env.loadEnvConfig("./", true);
+cli.nextDev(["-p", envConfig.combinedEnv.PORT || 3000]);
