@@ -2,9 +2,9 @@
   "name": "first-app",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.js",
     "build": "next build",
-    "start": "next start",
+    "start": "node scripts/prod.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "@types/node": "16.11.11",
     "@types/react": "17.0.37",
     "@types/uuid": "^8.3.3",
+    "dotenv": "^11.0.0",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
     "typescript": "4.5.2"
