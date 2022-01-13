@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 
 import { makeStyles } from "@mui/styles";
@@ -39,8 +39,10 @@ interface Props {
 
 const clientNo = "00012132";
 
-const TYPE_MODAL_INFO = {
-  transferInternet: "transferInternet,",
+export const TYPE_MODAL_INFO = {
+  transferInternet: "transferInternet",
+  transferAuto: "transferAuto",
+  transferBonds: "transferBonds",
 };
 
 const FormTKCKPage = (props: Props) => {
@@ -51,8 +53,8 @@ const FormTKCKPage = (props: Props) => {
   const [listMerchant, setListMerchant] = useState<MerchantNameItem[]>([]);
   const [listTerminal, setListTerminal] = useState<TerminalNameItem[]>([]);
 
-  const [openModalInfo, setOpenModalInfo] = useState(true);
-  const [typeInfoModal, setTypeInfoModal] = useState("");
+  const typeModal = useRef<string>("");
+  const [openModalInfo, setOpenModalInfo] = useState(false);
 
   const [data, setData] = useState({
     account: "",
@@ -122,10 +124,23 @@ const FormTKCKPage = (props: Props) => {
     });
   };
 
-  const _handleShowInfo = (key: string) => {};
+  const _handleShowInfo = (key: string) => {
+    typeModal.current = key;
+    _toggleModalInfo();
+  };
 
   const _toggleModalInfo = () => {
-    setOpenModalInfo((prev) => !prev);
+    setOpenModalInfo((prev) => {
+      if (prev) typeModal.current = "";
+      return !prev;
+    });
+  };
+
+  const _handleSubmit = () => {
+    if (!data.account || !data.company || !data.location) {
+      return;
+    }
+    onSubmit(data);
   };
   return (
     <div className={classes.root}>
@@ -179,7 +194,9 @@ const FormTKCKPage = (props: Props) => {
                 checked={data.transferInternet}
                 endIcon={<Image width={20} height={20} src={warningIcon} />}
                 label="Giao dịch qua Internet (Web và App)"
-                onClickEndIcon={() => _handleShowInfo("transferInternet")}
+                onClickEndIcon={() =>
+                  _handleShowInfo(TYPE_MODAL_INFO.transferInternet)
+                }
                 onChange={(event) => {
                   _handleChange(
                     "transferInternet",
@@ -193,6 +210,9 @@ const FormTKCKPage = (props: Props) => {
                 checked={data.transferAuto}
                 endIcon={<Image width={20} height={20} src={warningIcon} />}
                 label="Ứng trước tiền bán chứng khoán tự động"
+                onClickEndIcon={() =>
+                  _handleShowInfo(TYPE_MODAL_INFO.transferAuto)
+                }
                 onChange={(event) => {
                   _handleChange(
                     "transferAuto",
@@ -206,6 +226,9 @@ const FormTKCKPage = (props: Props) => {
                 checked={data.transferBonds}
                 endIcon={<Image width={20} height={20} src={warningIcon} />}
                 label="Giao dịch trái phiếu phát hành riêng lẻ"
+                onClickEndIcon={() =>
+                  _handleShowInfo(TYPE_MODAL_INFO.transferBonds)
+                }
                 onChange={(event) => {
                   _handleChange(
                     "transferBonds",
@@ -220,7 +243,7 @@ const FormTKCKPage = (props: Props) => {
 
       <Box px={3} py={1}>
         <ButtonCustom
-          onClick={() => onSubmit(data)}
+          onClick={_handleSubmit}
           fullWidth
           variant="contained"
           color="secondary"
@@ -234,7 +257,9 @@ const FormTKCKPage = (props: Props) => {
         open={openModalInfo}
         onClose={_toggleModalInfo}
       >
-        <Information onClose={_toggleModalInfo} />
+        <div>
+          <Information type={typeModal.current} onClose={_toggleModalInfo} />
+        </div>
       </Modal>
     </div>
   );
