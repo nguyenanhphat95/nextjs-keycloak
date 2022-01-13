@@ -1,5 +1,5 @@
-// prod-server.js
-require("dotenv").config(); // require dotenv
-const cli = require("next/dist/cli/next-start");
+const cli = require("next/dist/cli/next-dev");
+const env = require("@next/env");
 
-cli.nextStart(["-p", process.env.PORT || 3000]);
+const envConfig = env.loadEnvConfig("./", false);
+cli.nextDev(["-p", envConfig.combinedEnv.PORT || 3000]);
