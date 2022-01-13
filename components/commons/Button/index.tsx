@@ -14,10 +14,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: "50px !important",
     boxShadow: "none !important",
     height: "58px !important",
-    textTransform: "inherit",
     fontSize: theme.typography.button.fontSize,
     paddingLeft: "30px !important",
     paddingRight: "30px !important",
+    transition: "all 150ms ease",
+  },
+  textBtn: {
+    textTransform: "initial",
   },
   btnLoading: {
     background: "red",
@@ -45,7 +48,7 @@ const ButtonCustom = (props: Props) => {
           className={cn(classes.root, className)}
           {...rest}
         >
-          {children}
+          <span className={classes.textBtn}>{children}</span>
         </Button>
       )}
     </>
