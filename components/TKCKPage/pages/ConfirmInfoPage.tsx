@@ -307,7 +307,7 @@ const MOCK_DATA = {
 const ConfirmInfoPage = (props: Props) => {
   const classes = useStyles();
   const { data, onSubmit, typeCustomer } = props;
-  const [isAceptCondition, setIsAceptCondition] = useState(false);
+  const [isAceptCondition, setIsAceptCondition] = useState(true);
 
   const _handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsAceptCondition(event.target.checked);
@@ -386,9 +386,7 @@ const ConfirmInfoPage = (props: Props) => {
           <Grid item>
             <Grid container spacing={1} direction="column">
               <Grid item> Số điện thoại:</Grid>
-              <Grid item>
-                <b>0962486390</b>
-              </Grid>
+              <Grid item>{/* <b>0962486390</b> */}</Grid>
             </Grid>
           </Grid>
           <Grid item>
@@ -402,9 +400,7 @@ const ConfirmInfoPage = (props: Props) => {
           <Grid item>
             <Grid container spacing={1} direction="column">
               <Grid item>Địa chỉ email:</Grid>
-              <Grid item>
-                <b>email</b>
-              </Grid>
+              <Grid item>{/* <b>email</b> */}</Grid>
             </Grid>
           </Grid>
           <Grid item>
