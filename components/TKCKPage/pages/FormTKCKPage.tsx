@@ -26,7 +26,10 @@ const useStyles = makeStyles(() => ({
     fontWeight: 500,
   },
   modalInfo: {
-    top: "unset",
+    top: "unset !important",
+    "& .MuiPaper-root": {
+      borderRadius: "5px 5px 0px 0px",
+    },
   },
 }));
 
@@ -35,6 +38,10 @@ interface Props {
 }
 
 const clientNo = "00012132";
+
+const TYPE_MODAL_INFO = {
+  transferInternet: "transferInternet,",
+};
 
 const FormTKCKPage = (props: Props) => {
   const { onSubmit } = props;
@@ -45,6 +52,7 @@ const FormTKCKPage = (props: Props) => {
   const [listTerminal, setListTerminal] = useState<TerminalNameItem[]>([]);
 
   const [openModalInfo, setOpenModalInfo] = useState(true);
+  const [typeInfoModal, setTypeInfoModal] = useState("");
 
   const [data, setData] = useState({
     account: "",
@@ -226,7 +234,7 @@ const FormTKCKPage = (props: Props) => {
         open={openModalInfo}
         onClose={_toggleModalInfo}
       >
-        <Information />
+        <Information onClose={_toggleModalInfo} />
       </Modal>
     </div>
   );
