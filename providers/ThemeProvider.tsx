@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { getThemeWithMui } from "styles/themes/utils";
+import theme from "setup/material-ui/theme";
 
 interface Props {
   children: React.ReactNode;
 }
-const ourTheme = getThemeWithMui();
 
 const ThemeProvider = ({ children }: Props) => {
-  const [theme] = useState(ourTheme);
-
   return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
 };
 

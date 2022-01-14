@@ -1,6 +1,10 @@
-import { PaletteOptions, ThemeOptions } from "@mui/material/styles";
+import {
+  PaletteOptions,
+  ThemeOptions,
+  createTheme,
+} from "@mui/material/styles";
+import { ColorSchemeKEC } from "./types";
 import { CommonColors } from "@mui/material/styles/createPalette";
-import { ColorSchemeKEC } from "../types";
 
 const grey: ColorSchemeKEC = {
   50: "#FAFAFA",
@@ -215,7 +219,9 @@ const palette: PaletteOptions = {
   blue,
 };
 
-const theme: Readonly<ThemeOptions> = {
+const variables: Readonly<ThemeOptions> = {
   palette,
 };
+
+const theme = createTheme(variables);
 export default theme;

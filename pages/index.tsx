@@ -1,16 +1,15 @@
 import React from "react";
-import { makeStyles, createStyles } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import { Theme } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: any) =>
-  createStyles({
-    root: {
-      [theme.breakpoints.down("xs")]: {
-        background: "red",
-      },
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    background: "red",
+    [theme.breakpoints.down("sm")]: {
+      background: theme.palette.primary.main,
     },
-  })
-);
+  },
+}));
 
 const Home = () => {
   const classes = useStyles();
