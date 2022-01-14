@@ -1,19 +1,11 @@
-import React from "react";
-import { makeStyles } from "@mui/styles";
-import { Theme } from "@mui/material/styles";
+import * as React from "react";
+import type { NextPage } from "next";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    background: "red",
-    [theme.breakpoints.down("sm")]: {
-      background: theme.palette.primary.main,
-    },
-  },
-}));
-
-const Home = () => {
-  const classes = useStyles();
-  return <div className={classes.root}>Home page</div>;
+const Home: NextPage = () => {
+  return <Container maxWidth="lg">Home component</Container>;
 };
 
 export default Home;
