@@ -7,7 +7,7 @@ export function getTheme(): ThemeOptions {
 }
 
 export function createEmotionCache() {
-  return createCache({ key: "css" });
+  return createCache({ key: "css", prepend: true });
 }
 
 export function getThemeWithMui() {
